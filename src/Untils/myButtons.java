@@ -317,17 +317,9 @@ public class myButtons {
 	
 	public void draw(Canvas canvas) {
 		if(getState() == buttonState.UNTOUCH)
-		{
-			if(btnID == 7)
-			Untils.Dbg("111111111111111111111");
 			canvas.drawBitmap(bitmap, sourceRect, getRect(), null);
-			}
 		else
-		{
-		if(btnID == 7)
-			Untils.Dbg("22222222222222222222");
 			canvas.drawBitmap(bitmap_touched, sourceRect, getRect(), null);
-			}
 		if(text != null)
 		{
 			Untils.drawString(canvas, text, (int)(getCenterX()), (int)(getCenterY()), textColor, textSize, textAlign);

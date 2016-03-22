@@ -100,8 +100,6 @@ public class myDialog {
 	
 	public void draw(Canvas canvas)
 	{
-		if(!isActive) return;
-			Untils.Dbg("333333333333333333333");
 		spr_bg.draw(canvas, (int)(-w/2), 0);
 		btn_yes.draw(canvas);
 		btn_no.draw(canvas);
