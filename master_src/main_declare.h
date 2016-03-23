@@ -16,22 +16,9 @@ public static float SCALE_HEIGHT;
 public boolean s_isBackKeyPressed = false;
 public final String refName = "gamofun2014_dis";
 
-public static int ScaleX(float x)
-{
-	return (int)(x*SCALE_WIDTH);
-}
-public static int ScaleX(int x)
-{
-	return (int)(x*SCALE_WIDTH);
-}
-public static int ScaleY(float y)
-{
-	return (int)(y*SCALE_HEIGHT);
-}
-public static int ScaleY(int y)
-{
-	return (int)(y*SCALE_HEIGHT);
-}
+#define ScaleX(x) x
+#define ScaleY(y) y
+
 interface gameState {
 	final static int STATE_INIT = 0;
 	final static int STATE_LOAD = STATE_INIT + 1;
@@ -91,7 +78,7 @@ interface Define {
 	final static float NUM_STAR1 = 0.6f;
 	final static float NUM_STAR2 = 0.75f;
 	final static float NUM_STAR3 = 0.9f;
-	final static int LOGO_FRAME = 10;
+	final static int LOGO_FRAME = 100;
 	
 	final static int BTN_PLAY_Y = ScaleY(10);
 	final static int BTN_PLAY_X = ScaleX(10);
@@ -106,10 +93,10 @@ interface Define {
 	final static int BTN_MUSIC_X = (int)(SCREEN_WIDTH - 10);
 	final static int BTN_SFX_X = (int)(SCREEN_WIDTH - 10 - ScaleX(50));
 	
-	final static int TEXT_SIZE_SMALL = 7 + ScaleX(9);
-	final static int TEXT_SIZE_MED = 7 + ScaleX(13);
-	final static int TEXT_SIZE_LARGE = 7 + ScaleX(18);
-	final static int TEXT_SIZE_VERY_LARGE = 7 + ScaleX(38);
+	final static int TEXT_SIZE_SMALL = 20;
+	final static int TEXT_SIZE_MED = TEXT_SIZE_SMALL + 6;
+	final static int TEXT_SIZE_LARGE = TEXT_SIZE_MED + 8;
+	final static int TEXT_SIZE_VERY_LARGE = TEXT_SIZE_LARGE + 10;
 	
 	
 	final static int HUD_HP_Y = TEXT_SIZE_MED/2 + 4;
@@ -119,7 +106,7 @@ interface Define {
 	final static int HUD_HP_H = TEXT_SIZE_MED;
 	final static int HUD_LEVEL_Y = HUD_HP_Y + HUD_HP_H + 4;
 	final static int HUD_LEVEL_X = ScaleX(6);
-	final static int HUD_HEIGHT = ScaleX(82);//HUD_LEVEL_Y + TEXT_SIZE_MED/2 + 4;
+	final static int HUD_HEIGHT = ScaleX(82);
 	
 	final static int IGM_TITLE_Y = ScaleY(60);
 	final static int IGM_BTN_Y = ScaleY(170);
