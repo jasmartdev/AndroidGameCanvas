@@ -40,6 +40,7 @@ if "%BUILD_MODE%"=="debug" (
 )
 if "%BUILD_MODE%"=="clean" (
 	echo *** build clean ***
+	rmdir tmp /s /q
 	call ant clean
 )
 if "%BUILD_MODE%"=="emu" (
