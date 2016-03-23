@@ -49,7 +49,7 @@ public class MainActivity extends Activity {
 		SCREEN_HEIGHT = display.getHeight();
 		SCALE_WIDTH = SCREEN_WIDTH/SCREEN_WIDTH_ORIGINAL;
 		SCALE_HEIGHT = SCREEN_HEIGHT/SCREEN_HEIGHT_ORIGINAL;
-		#endif		
+		#endif
 		mySurfaceView = new MySurfaceView(this);
 		setContentView(mySurfaceView);
 		Untils.Dbg("MainActivity onCreate SCREEN_WIDTH:"+SCREEN_WIDTH+" SCREEN_HEIGHT:"+SCREEN_HEIGHT);
@@ -102,6 +102,8 @@ public class MainActivity extends Activity {
 			s_init_state = true;
 			#ifdef USE_BG_BUFFER
 			s_touch = new myTouch(SCREEN_WIDTH/SCREEN_WIDTH_PHONE, SCREEN_HEIGHT/SCREEN_HEIGHT_PHONE);
+			s_bg_buffer = Bitmap.createBitmap((int)SCREEN_WIDTH, (int)SCREEN_HEIGHT, Bitmap.Config.ARGB_8888);
+			s_canvas = new Canvas(s_bg_buffer);
 			#else
 			s_touch = new myTouch();
 			#endif
@@ -144,8 +146,6 @@ public class MainActivity extends Activity {
 				if(surfaceHolder.getSurface().isValid()){
 					#ifdef USE_BG_BUFFER
 					s_canvas_scale = surfaceHolder.lockCanvas();
-					s_bg_buffer = Bitmap.createBitmap((int)SCREEN_WIDTH, (int)SCREEN_HEIGHT, Bitmap.Config.ARGB_8888);
-					s_canvas = new Canvas(s_bg_buffer);
 					#else
 					s_canvas = surfaceHolder.lockCanvas();
 					#endif
