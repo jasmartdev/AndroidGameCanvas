@@ -88,5 +88,10 @@
     -->
     <!-- version-tag: 1 -->
     <import file="${sdk.dir}/tools/ant/build.xml" />
+	<path id="class.path">
+	  <fileset dir="libs">
+		<include name="*.jar" />
+	  </fileset>
+	</path>
 
 </project>
