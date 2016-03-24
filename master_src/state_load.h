@@ -217,6 +217,16 @@ public void s_game_STATE_LOAD(int state)
 							s_gameSprites[DATA.SPR_GUN].Load(s_mainActive.getApplicationContext());
 							s_gameSprites[DATA.SPR_GUN].Scale(SCALE_WIDTH);
 						}
+						if(s_gameSprites[DATA.SPR_BALLOON] == null)
+						{
+							s_gameSprites[DATA.SPR_BALLOON] = new mySprites(R.drawable.balloon, 0, 0);
+							s_gameSprites[DATA.SPR_BALLOON].Load(s_mainActive.getApplicationContext());
+						}
+						if(s_gameSprites[DATA.SPR_BALLOON_BURN] == null)
+						{
+							s_gameSprites[DATA.SPR_BALLOON_BURN] = new mySprites(R.drawable.balloon_burn, 0, 0);
+							s_gameSprites[DATA.SPR_BALLOON_BURN].Load(s_mainActive.getApplicationContext());
+						}
 						break;
 					case 2: //load dis
 						dis = new myDis[Define.NUM_DIS_MAX];

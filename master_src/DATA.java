@@ -24,7 +24,9 @@ public interface DATA {
 	final static int SPR_STAR3 = SPR_STAR2 + 1;
 	final static int SPR_GUN = SPR_STAR3 + 1;
 	final static int SPR_GUN_FIRE = SPR_GUN + 1;
-	final static int SPR_MAX = SPR_GUN_FIRE + 1;
+	final static int SPR_BALLOON = SPR_GUN_FIRE + 1;
+	final static int SPR_BALLOON_BURN = SPR_BALLOON + 1;
+	final static int SPR_MAX = SPR_BALLOON_BURN + 1;
 	
 //define for string
 	final String TXT_TOUCH_TO_CONTINUE = "TOUCH ON SCREEN TO CONTINUE";
