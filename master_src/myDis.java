@@ -20,8 +20,8 @@ public class myDis {
 	private mySprites sprBurn;
 	private Rect curRect;
 	private Rect sourceRect;
-	private float x;
-	private float y;
+	private int x;
+	private int y;
 	private float angle;
 	private float speed;
 	private int disID;
@@ -36,21 +36,7 @@ public class myDis {
 		final static int BURN = 2;
 		final static int OUT = 3;
 	}
-	
-	public myDis(mySprites spr1, mySprites spr2, int id, float x, float y, float angle, float speed) {
-		this.sprFly = spr1;
-		this.sprBurn = spr2;
-		this.disID = id;
-		this.x = x;
-		this.y = y;
-		this.angle = angle;
-		this.speed = speed;
-		curRect = new Rect(sprFly.getRect());
-		sourceRect =  new Rect(sprFly.getRect());
-		state = disState.NONE;
-		this.sprBurn.setLoop(1);
-	}
-	
+
 	public myDis(mySprites spr1, mySprites spr2, int id, int x, int y, float angle, float speed) {
 		this.sprFly = spr1;
 		this.sprBurn = spr2;
@@ -130,16 +116,16 @@ public class myDis {
 	public void setID(int id) {
 		this.disID = id;
 	}
-	public float getX() {
+	public int getX() {
 		return x;
 	}
-	public void setX(float x) {
+	public void setX(int x) {
 		this.x = x;
 	}
-	public float getY() {
+	public int getY() {
 		return y;
 	}
-	public void setY(float y) {
+	public void setY(int y) {
 		this.y = y;
 	}
 	public void updateRect() {
@@ -149,12 +135,12 @@ public class myDis {
 		this.curRect.bottom = sourceRect.bottom + (int)this.y;
 	}
 	public void updatePos() {
-		float vx = this.speed*this.angle;
-		float vy = this.speed/this.angle;
+		int vx = (int)(this.speed*this.angle);
+		int vy = (int)(this.speed/this.angle);
 		this.x = this.x + vx;
 		this.y = this.y - vy;
 	}
-	public boolean checkOut(float x, float y) {
+	public boolean checkOut(int x, int y) {
 		return (this.x > x || this. y < y);
 	}
 	public boolean isFly() {
@@ -178,7 +164,7 @@ public class myDis {
 		setState(disState.NONE);
 		this.sprBurn.setLoop(1);
 	}
-	public void update(boolean touch, float x, float y) {
+	public void update(boolean touch, int x, int y) {
 		if(getState() == disState.FLY)
 		{
 			sprFly.update();
@@ -205,8 +191,8 @@ public class myDis {
 	
 	public void draw(Canvas canvas) {
 		if(getState() == disState.FLY)
-			sprFly.draw(canvas, (int)this.x, (int)this.y);
+			sprFly.draw(canvas, this.x, this.y);
 		else if(getState() == disState.BURN)
-			sprBurn.draw(canvas, (int)this.x, (int)this.y);
+			sprBurn.draw(canvas, this.x, this.y);
 	}
 }

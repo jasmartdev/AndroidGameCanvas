@@ -157,32 +157,32 @@ public void s_game_STATE_LOAD(int state)
 						}
 						if(s_gameSprites[DATA.SPR_BGR_1] == null)
 						{
-							s_gameSprites[DATA.SPR_BGR_1] = new mySprites(R.drawable.bgr_1, 0, (float)Define.HUD_HEIGHT);
+							s_gameSprites[DATA.SPR_BGR_1] = new mySprites(R.drawable.bgr_1, 0, Define.HUD_HEIGHT);
 							s_gameSprites[DATA.SPR_BGR_1].Load(s_mainActive.getApplicationContext());
 							s_gameSprites[DATA.SPR_BGR_1].Scale(SCREEN_WIDTH/300);
 						}
 						if(s_gameSprites[DATA.SPR_BGR_2] == null)
 						{
-							s_gameSprites[DATA.SPR_BGR_2] = new mySprites(R.drawable.bgr_2, 0, (float)Define.HUD_HEIGHT);
+							s_gameSprites[DATA.SPR_BGR_2] = new mySprites(R.drawable.bgr_2, 0, Define.HUD_HEIGHT);
 							s_gameSprites[DATA.SPR_BGR_2].Load(s_mainActive.getApplicationContext());
 							s_gameSprites[DATA.SPR_BGR_2].Scale(SCREEN_WIDTH/300);
 						}
 						if(s_gameSprites[DATA.SPR_BGR_3] == null)
 						{
-							s_gameSprites[DATA.SPR_BGR_3] = new mySprites(R.drawable.bgr_3, 0, (float)Define.HUD_HEIGHT);
+							s_gameSprites[DATA.SPR_BGR_3] = new mySprites(R.drawable.bgr_3, 0, Define.HUD_HEIGHT);
 							s_gameSprites[DATA.SPR_BGR_3].Load(s_mainActive.getApplicationContext());
 							s_gameSprites[DATA.SPR_BGR_3].Scale(SCREEN_WIDTH/300);
 						}
 						if(s_gameSprites[DATA.SPR_BGR_4] == null)
 						{
-							s_gameSprites[DATA.SPR_BGR_4] = new mySprites(R.drawable.bgr_4, 0, (float)Define.HUD_HEIGHT);
+							s_gameSprites[DATA.SPR_BGR_4] = new mySprites(R.drawable.bgr_4, 0, Define.HUD_HEIGHT);
 							s_gameSprites[DATA.SPR_BGR_4].Load(s_mainActive.getApplicationContext());
 							s_gameSprites[DATA.SPR_BGR_4].Scale(SCREEN_WIDTH/300);
 							s_gameSprites[DATA.SPR_BGR_5] = s_gameSprites[DATA.SPR_BGR_4];
 						}
 						if(s_gameSprites[DATA.SPR_GROUND] == null)
 						{
-							s_gameSprites[DATA.SPR_GROUND] = new mySprites(R.drawable.ground, 0, (float)Define.GROUND_Y);
+							s_gameSprites[DATA.SPR_GROUND] = new mySprites(R.drawable.ground, 0, Define.GROUND_Y);
 							s_gameSprites[DATA.SPR_GROUND].Load(s_mainActive.getApplicationContext());
 							s_gameSprites[DATA.SPR_GROUND].Scale(SCALE_WIDTH);
 						}
@@ -213,7 +213,7 @@ public void s_game_STATE_LOAD(int state)
 						
 						if(s_gameSprites[DATA.SPR_GUN] == null)
 						{
-							s_gameSprites[DATA.SPR_GUN] = new mySprites(R.drawable.gun, 0f, Define.GUN_Y);
+							s_gameSprites[DATA.SPR_GUN] = new mySprites(R.drawable.gun, 0, Define.GUN_Y);
 							s_gameSprites[DATA.SPR_GUN].Load(s_mainActive.getApplicationContext());
 							s_gameSprites[DATA.SPR_GUN].Scale(SCALE_WIDTH);
 						}

@@ -212,7 +212,7 @@ void dialog_update()
 		}
 	}
 }
-void drawLoandingBar(int per, int max, float x, float y, float w, float h, int color, int bcolor)
+void drawLoandingBar(int per, int max, int x, int y, int w, int h, int color, int bcolor)
 {
 	Paint myPaint = new Paint();
 	myPaint.setColor(Color.rgb(0, 0, 0));
@@ -221,13 +221,13 @@ void drawLoandingBar(int per, int max, float x, float y, float w, float h, int c
 	myPaint.setColor(color);
 	s_canvas.drawRect(x, y, x + w*per/max, y + h, myPaint);
 }
-void drawLoandingBar(int per, int max, float x, float y, float w, float h)
+void drawLoandingBar(int per, int max, int x, int y, int w, int h)
 {
 	drawLoandingBar(per, max, x, y, w, h, Color.RED, Color.WHITE);
 }
 void drawLoandingBar(int per, int max)
 {
-	drawLoandingBar(per, max, (float)20, SCREEN_HEIGHT - 100, SCREEN_WIDTH - 40, (float)20);
+	drawLoandingBar(per, max, 20, SCREEN_HEIGHT - 100, SCREEN_WIDTH - 40, 20);
 }
 boolean levelUp()
 {
