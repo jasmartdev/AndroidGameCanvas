@@ -31,8 +31,8 @@ public void s_game_STATE_LOAD(int state)
 				switch(s_load_step)
 				{
 					case 0: //init and load RMS
-						music_enable = true;
-						sfx_enable = true;
+						music_enable = false;
+						sfx_enable = false;
 						s_highscore = s_ref.getInt("s_highscore", 0);
 					case 1: //load buttons
 						if(btn_play == null)
@@ -219,12 +219,12 @@ public void s_game_STATE_LOAD(int state)
 						}
 						if(s_gameSprites[DATA.SPR_BALLOON] == null)
 						{
-							s_gameSprites[DATA.SPR_BALLOON] = new mySprites(R.drawable.balloon, 0, 0);
+							s_gameSprites[DATA.SPR_BALLOON] = new mySprites(R.drawable.balloon, 0, 0, 10);
 							s_gameSprites[DATA.SPR_BALLOON].Load(s_mainActive.getApplicationContext());
 						}
 						if(s_gameSprites[DATA.SPR_BALLOON_BURN] == null)
 						{
-							s_gameSprites[DATA.SPR_BALLOON_BURN] = new mySprites(R.drawable.balloon_burn, 0, 0);
+							s_gameSprites[DATA.SPR_BALLOON_BURN] = new mySprites(R.drawable.balloon_burn, 0, 0, 6);
 							s_gameSprites[DATA.SPR_BALLOON_BURN].Load(s_mainActive.getApplicationContext());
 						}
 						break;
@@ -233,6 +233,11 @@ public void s_game_STATE_LOAD(int state)
 						for(int i = 0; i < Define.NUM_DIS_MAX; i++)
 						{
 							dis[i] = new myDis(s_gameSprites[DATA.SPR_DIS0], s_gameSprites[DATA.SPR_DIS_BURN], 0, Define.BASE_START_X, Define.BASE_START_Y, Define.BASE_ANGLE, Define.BASE_SPEED);
+						}
+						balloons = new balloonObject[26];
+						for(int i = 0; i < 26; i++)
+						{
+							balloons[i] = new balloonObject(s_gameSprites[DATA.SPR_BALLOON], s_gameSprites[DATA.SPR_BALLOON_BURN], (char)('A' + i), Define.BASE_START_X, Define.BASE_START_Y, Define.BASE_ANGLE, Define.BASE_SPEED);
 						}
 						break;
 					default:

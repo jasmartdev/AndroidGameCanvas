@@ -19,6 +19,7 @@ volatile boolean music_enable;
 volatile boolean sfx_enable;
 volatile myTouch s_touch;
 volatile myDis[] dis;
+volatile balloonObject[] balloons;
 volatile myDialog s_dialog;
 volatile boolean s_showdialog = false;
 volatile int s_blood = 100;

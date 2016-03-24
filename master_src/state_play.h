@@ -9,6 +9,8 @@ public void s_game_STATE_PLAY(int state)
 		dis[0].resetCount();
 		dis[0].start();
 		s_blood = Define.BLOOD_MAX;
+		balloons[0].start();
+		
 	}
 	else if(state == State.UPDATE)
 	{
@@ -70,6 +72,7 @@ public void s_game_STATE_PLAY(int state)
 			dis[i].update(s_touch.getTouch(), s_touch.getX(), s_touch.getY());
 		}				
 		levelUp();
+		balloons[0].update(s_touch.getTouch(), s_touch.getX(), s_touch.getY());
 	}
 	else if(state == State.PAINT)
 	{
@@ -78,6 +81,7 @@ public void s_game_STATE_PLAY(int state)
 		s_gameSprites[DATA.SPR_BGR_1 + s_level - 1].draw(s_canvas);
 		for(int i = 0; i < Define.NUM_DIS_MAX && i < s_level; i++)
 			dis[i].draw(s_canvas);
+		balloons[0].draw(s_canvas);
 		paint_HUD();
 		s_gameSprites[DATA.SPR_GUN].draw(s_canvas, (int)(s_touch.getX() - Define.GUN_OFF_X), 0);
 		btn_gamePause.draw(s_canvas);
