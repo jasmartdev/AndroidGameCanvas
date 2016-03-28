@@ -229,16 +229,7 @@ void drawLoandingBar(int per, int max)
 {
 	drawLoandingBar(per, max, 20, SCREEN_HEIGHT - 100, SCREEN_WIDTH - 40, 20);
 }
-boolean levelUp()
-{
-	if(myDis.getCount() >= s_levelUp[s_level])
-	{
-		dis[s_level].start();
-		s_level++;
-		return true;
-	}
-	return false;
-}
+
 void exit()
 {
 	snd_player.stopAll();

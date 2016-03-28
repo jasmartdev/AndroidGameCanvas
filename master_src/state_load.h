@@ -90,7 +90,6 @@ public void s_game_STATE_LOAD(int state)
 						{
 							s_gameSprites[DATA.SPR_SPLASH] = new mySprites(R.drawable.splash, 0, 0);
 							s_gameSprites[DATA.SPR_SPLASH].Load(s_mainActive.getApplicationContext());
-							s_gameSprites[DATA.SPR_SPLASH].Scale(SCALE_WIDTH, SCALE_HEIGHT);
 						}
 						#endif
 						break;
@@ -142,84 +141,19 @@ public void s_game_STATE_LOAD(int state)
 							btn_exit.Scale(SCALE_WIDTH, SCALE_HEIGHT);
 						}
 						break;
-					case 1: //load sprites
-						if(s_gameSprites[DATA.SPR_DIS0] ==  null)
+					case 1: //load sprites						
+						if(s_gameSprites[DATA.SPR_BGR] == null)
 						{
-							s_gameSprites[DATA.SPR_DIS0] = new mySprites(R.drawable.dis0, 0, 0);
-							s_gameSprites[DATA.SPR_DIS0].Load(s_mainActive.getApplicationContext());
-							s_gameSprites[DATA.SPR_DIS0].Scale(SCALE_WIDTH);
+							s_gameSprites[DATA.SPR_BGR] = s_gameSprites[DATA.SPR_SPLASH];
 						}
-						if(s_gameSprites[DATA.SPR_DIS_BURN] ==  null)
-						{
-							s_gameSprites[DATA.SPR_DIS_BURN] = new mySprites(R.drawable.dis_burn, 0, 0, 6);
-							s_gameSprites[DATA.SPR_DIS_BURN].Load(s_mainActive.getApplicationContext());
-							s_gameSprites[DATA.SPR_DIS_BURN].Scale(SCALE_WIDTH);
-						}
-						if(s_gameSprites[DATA.SPR_BGR_1] == null)
-						{
-							s_gameSprites[DATA.SPR_BGR_1] = new mySprites(R.drawable.bgr_1, 0, Define.HUD_HEIGHT);
-							s_gameSprites[DATA.SPR_BGR_1].Load(s_mainActive.getApplicationContext());
-							s_gameSprites[DATA.SPR_BGR_1].Scale(SCREEN_WIDTH/300);
-						}
-						if(s_gameSprites[DATA.SPR_BGR_2] == null)
-						{
-							s_gameSprites[DATA.SPR_BGR_2] = new mySprites(R.drawable.bgr_2, 0, Define.HUD_HEIGHT);
-							s_gameSprites[DATA.SPR_BGR_2].Load(s_mainActive.getApplicationContext());
-							s_gameSprites[DATA.SPR_BGR_2].Scale(SCREEN_WIDTH/300);
-						}
-						if(s_gameSprites[DATA.SPR_BGR_3] == null)
-						{
-							s_gameSprites[DATA.SPR_BGR_3] = new mySprites(R.drawable.bgr_3, 0, Define.HUD_HEIGHT);
-							s_gameSprites[DATA.SPR_BGR_3].Load(s_mainActive.getApplicationContext());
-							s_gameSprites[DATA.SPR_BGR_3].Scale(SCREEN_WIDTH/300);
-						}
-						if(s_gameSprites[DATA.SPR_BGR_4] == null)
-						{
-							s_gameSprites[DATA.SPR_BGR_4] = new mySprites(R.drawable.bgr_4, 0, Define.HUD_HEIGHT);
-							s_gameSprites[DATA.SPR_BGR_4].Load(s_mainActive.getApplicationContext());
-							s_gameSprites[DATA.SPR_BGR_4].Scale(SCREEN_WIDTH/300);
-							s_gameSprites[DATA.SPR_BGR_5] = s_gameSprites[DATA.SPR_BGR_4];
-						}
-						if(s_gameSprites[DATA.SPR_GROUND] == null)
-						{
-							s_gameSprites[DATA.SPR_GROUND] = new mySprites(R.drawable.ground, 0, Define.GROUND_Y);
-							s_gameSprites[DATA.SPR_GROUND].Load(s_mainActive.getApplicationContext());
-							s_gameSprites[DATA.SPR_GROUND].Scale(SCALE_WIDTH);
-						}
-						if(s_gameSprites[DATA.SPR_STAR0] == null)
-						{
-							s_gameSprites[DATA.SPR_STAR0] = new mySprites(R.drawable.star0, Define.RESULT_RATE_ICON_X, Define.RESULT_RATE_ICON_Y);
-							s_gameSprites[DATA.SPR_STAR0].Load(s_mainActive.getApplicationContext());
-							s_gameSprites[DATA.SPR_STAR0].Scale(SCALE_WIDTH);
-						}
-						if(s_gameSprites[DATA.SPR_STAR1] == null)
-						{
-							s_gameSprites[DATA.SPR_STAR1] = new mySprites(R.drawable.star1, Define.RESULT_RATE_ICON_X, Define.RESULT_RATE_ICON_Y);
-							s_gameSprites[DATA.SPR_STAR1].Load(s_mainActive.getApplicationContext());
-							s_gameSprites[DATA.SPR_STAR1].Scale(SCALE_WIDTH);
-						}
-						if(s_gameSprites[DATA.SPR_STAR2] == null)
-						{
-							s_gameSprites[DATA.SPR_STAR2] = new mySprites(R.drawable.star2, Define.RESULT_RATE_ICON_X, Define.RESULT_RATE_ICON_Y);
-							s_gameSprites[DATA.SPR_STAR2].Load(s_mainActive.getApplicationContext());
-							s_gameSprites[DATA.SPR_STAR2].Scale(SCALE_WIDTH);
-						}
-						if(s_gameSprites[DATA.SPR_STAR3] == null)
-						{
-							s_gameSprites[DATA.SPR_STAR3] = new mySprites(R.drawable.star3, Define.RESULT_RATE_ICON_X, Define.RESULT_RATE_ICON_Y);
-							s_gameSprites[DATA.SPR_STAR3].Load(s_mainActive.getApplicationContext());
-							s_gameSprites[DATA.SPR_STAR3].Scale(SCALE_WIDTH);
-						}
-						
 						if(s_gameSprites[DATA.SPR_GUN] == null)
 						{
 							s_gameSprites[DATA.SPR_GUN] = new mySprites(R.drawable.gun, 0, Define.GUN_Y);
 							s_gameSprites[DATA.SPR_GUN].Load(s_mainActive.getApplicationContext());
-							s_gameSprites[DATA.SPR_GUN].Scale(SCALE_WIDTH);
 						}
 						if(s_gameSprites[DATA.SPR_BALLOON] == null)
 						{
-							s_gameSprites[DATA.SPR_BALLOON] = new mySprites(R.drawable.balloon, 0, 0, 10);
+							s_gameSprites[DATA.SPR_BALLOON] = new mySprites(R.drawable.balloon, 0, 0, 5);
 							s_gameSprites[DATA.SPR_BALLOON].Load(s_mainActive.getApplicationContext());
 						}
 						if(s_gameSprites[DATA.SPR_BALLOON_BURN] == null)
@@ -227,17 +161,15 @@ public void s_game_STATE_LOAD(int state)
 							s_gameSprites[DATA.SPR_BALLOON_BURN] = new mySprites(R.drawable.balloon_burn, 0, 0, 6);
 							s_gameSprites[DATA.SPR_BALLOON_BURN].Load(s_mainActive.getApplicationContext());
 						}
-						break;
-					case 2: //load dis
-						dis = new myDis[Define.NUM_DIS_MAX];
-						for(int i = 0; i < Define.NUM_DIS_MAX; i++)
+						if(s_gameSprites[DATA.SPR_BULLET] == null)
 						{
-							dis[i] = new myDis(s_gameSprites[DATA.SPR_DIS0], s_gameSprites[DATA.SPR_DIS_BURN], 0, Define.BASE_START_X, Define.BASE_START_Y, Define.BASE_ANGLE, Define.BASE_SPEED);
+							s_gameSprites[DATA.SPR_BULLET] = new mySprites(R.drawable.bullet, 0, 0, 6);
+							s_gameSprites[DATA.SPR_BULLET].Load(s_mainActive.getApplicationContext());
 						}
-						balloons = new balloonObject[26];
-						for(int i = 0; i < 26; i++)
+						if(s_gameSprites[DATA.SPR_BULLET_BURN] == null)
 						{
-							balloons[i] = new balloonObject(s_gameSprites[DATA.SPR_BALLOON], s_gameSprites[DATA.SPR_BALLOON_BURN], (char)('A' + i), Define.BASE_START_X, Define.BASE_START_Y, Define.BASE_ANGLE, Define.BASE_SPEED);
+							s_gameSprites[DATA.SPR_BULLET_BURN] = new mySprites(R.drawable.balloon_burn, 0, 0, 6);
+							s_gameSprites[DATA.SPR_BULLET_BURN].Load(s_mainActive.getApplicationContext());
 						}
 						break;
 					default:

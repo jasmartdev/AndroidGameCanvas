@@ -1,8 +1,8 @@
 MySurfaceView mySurfaceView;
 private static MainActivity s_mainActive;
 #ifdef USE_BG_BUFFER
-final static int SCREEN_WIDTH = 750;
-final static int SCREEN_HEIGHT = 1042;
+final static int SCREEN_WIDTH = 2048;
+final static int SCREEN_HEIGHT = 2732;
 public static int SCREEN_WIDTH_PHONE;
 public static int SCREEN_HEIGHT_PHONE;
 #else
@@ -70,8 +70,8 @@ interface Define {
 	final static int ANGLE_DELTA = 2;
 	final static int BASE_SPEED = 2;
 	final static float SPEED_DELTA = 0.5f;
-	final static int BASE_START_X = -100;
-	final static int BASE_START_Y = 200;
+	final static int BASE_START_X = SCREEN_WIDTH>>1;
+	final static int BASE_START_Y = SCREEN_HEIGHT + 20;
 	final static int START_Y_DELTA = 30;
 	final static float NUM_STAR1 = 0.6f;
 	final static float NUM_STAR2 = 0.75f;

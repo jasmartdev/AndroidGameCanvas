@@ -45,22 +45,6 @@ public void s_game_STATE_RESULT(int state)
 		s_canvas.drawColor(Color.CYAN);
 		Untils.drawString(s_canvas, DATA.TXT_RESULT, SCREEN_WIDTH/2, Define.RESULT_TITLE_Y, Color.WHITE, Define.TEXT_SIZE_LARGE, Align.CENTER);
 		Untils.drawString(s_canvas, "RATE:  ", SCREEN_WIDTH/2, Define.RESULT_RATE_Y, Color.WHITE, Define.TEXT_SIZE_LARGE, Align.RIGHT);
-		if(s_rate >= Define.NUM_STAR3)
-		{
-			s_gameSprites[DATA.SPR_STAR3].draw(s_canvas);
-		}
-		else if(s_rate >= Define.NUM_STAR2)
-		{
-			s_gameSprites[DATA.SPR_STAR2].draw(s_canvas);
-		}
-		else if(s_rate >= Define.NUM_STAR1)
-		{
-			s_gameSprites[DATA.SPR_STAR1].draw(s_canvas);
-		}
-		else
-		{
-			s_gameSprites[DATA.SPR_STAR0].draw(s_canvas);
-		}
 		Untils.drawString(s_canvas, "HIGH SCORE: "+s_highscore, SCREEN_WIDTH/2, Define.RESULT_HIGHSCORE_Y, Color.RED, Define.TEXT_SIZE_LARGE, Align.CENTER);
 		Untils.drawString(s_canvas, "SCORE:      "+s_score, SCREEN_WIDTH/2, Define.RESULT_SCORE_Y, Color.WHITE, Define.TEXT_SIZE_LARGE, Align.CENTER);
 		btn_replay.draw(s_canvas);

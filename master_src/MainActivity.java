@@ -21,6 +21,7 @@ import android.content.SharedPreferences.Editor;
 #ifdef USE_BG_BUFFER
 import android.graphics.Rect;
 #endif
+import java.util.*;
 
 import Untils.Untils;
 import Untils.myButtons;

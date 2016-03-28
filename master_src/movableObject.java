@@ -10,6 +10,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.content.Context;
 import java.lang.Math;
+import java.util.*;
 
 import Untils.mySprites;
 import Untils.Untils;
@@ -22,10 +23,11 @@ public class movableObject {
 	protected Rect sourceRect;
 	protected int x;
 	protected int y;
-	protected float angle;
-	protected float speed;
+	protected int vx;
+	protected int vy;
 	protected int ID;
 	protected int state;
+	public static HashSet<movableObject> allObject = new HashSet<movableObject>();
 	
 	interface objState {
 		final static int NONE = 0;
@@ -34,15 +36,17 @@ public class movableObject {
 		final static int DESTROY = 3;
 	}
 
-	public movableObject(mySprites spr1, mySprites spr2, int id, int x, int y, float angle, float speed) {
+	public movableObject(mySprites spr1, mySprites spr2, int id, int x, int y, int vx, int vy) {
 		this.sprNormal = spr1;
 		this.sprBurn = spr2;
 		this.ID = id;
 		this.x = x;
 		this.y = y;
-		this.angle = angle;
-		this.speed = speed;
+		this.vx = vx;
+		this.vy = vy;
 		reset();
+		if(!allObject.contains(this))
+			allObject.add(this);
 	}
 	
 	public movableObject(mySprites spr1, mySprites spr2, int x, int y) {
@@ -51,9 +55,11 @@ public class movableObject {
 		this.ID = -1;
 		this.x = x;
 		this.y = y;
-		this.angle = 0;
-		this.speed = 0;
+		this.vx = 0;
+		this.vy = 0;
 		reset();
+		if(!allObject.contains(this))
+			allObject.add(this);
 	}
 	
 	public movableObject(movableObject other) {
@@ -62,9 +68,11 @@ public class movableObject {
 		this.ID = other.ID;
 		this.x = other.x;
 		this.y = other.y;
-		this.angle = other.angle;
-		this.speed = other.speed;
+		this.vx = other.vx;
+		this.vy = other.vy;
 		reset();
+		if(!allObject.contains(this))
+			allObject.add(this);
 	}
 	
 	public Rect getRect() {
@@ -85,17 +93,17 @@ public class movableObject {
 	public void setState(int state) {
 		this.state = state;
 	}
-	public float getAngle() {
-		return angle;
+	public double getVx() {
+		return vx;
 	}
-	public void setAngle(float angle) {
-		this.angle = angle;
+	public void setVx(int vx) {
+		this.vx = vx;
 	}
-	public float getSpeed() {
-		return speed;
+	public float getVy() {
+		return vy;
 	}
-	public void setSpeed(float speed) {
-		this.speed = speed;
+	public void setVy(int vy) {
+		this.vy = vy;
 	}
 	public int getID() {
 		return ID;
@@ -115,6 +123,14 @@ public class movableObject {
 	public void setY(int y) {
 		this.y = y;
 	}
+	public int getType()
+	{
+		return -1;
+	}
+	public static HashSet<movableObject> getAllObject()
+	{
+		return allObject;
+	}
 	public void updateRect() {
 		this.curRect.left = sourceRect.left + (int)this.x;
 		this.curRect.right = sourceRect.right + (int)this.x;
@@ -122,10 +138,9 @@ public class movableObject {
 		this.curRect.bottom = sourceRect.bottom + (int)this.y;
 	}
 	public void updatePos() {
-		int vx = (int)(this.speed*this.angle);
-		int vy = (int)(this.speed/this.angle);
 		this.x = this.x + vx;
-		this.y = this.y - vy;
+		this.y = this.y + vy;
+		Untils.Dbg("x:"+x+" y:"+y+" vx:"+vx+" vy:"+vy);
 	}
 	public boolean isInRect(Rect r) {
 		return r.contains(curRect);

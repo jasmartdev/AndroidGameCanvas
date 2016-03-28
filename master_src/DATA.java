@@ -12,21 +12,14 @@ public interface DATA {
 	final static int SPR_BTN_PLAY_DOWN = SPR_BTN_PLAY_UP + 1;
 	final static int SPR_BTN_PAUSE_UP = SPR_BTN_PLAY_DOWN + 1;
 	final static int SPR_BTN_PAUSE_DOWN = SPR_BTN_PAUSE_UP + 1;
-	final static int SPR_BGR_1 = SPR_BTN_PAUSE_DOWN + 1;
-	final static int SPR_BGR_2 = SPR_BGR_1 + 1;
-	final static int SPR_BGR_3 = SPR_BGR_2 + 1;
-	final static int SPR_BGR_4 = SPR_BGR_3 + 1;
-	final static int SPR_BGR_5 = SPR_BGR_4 + 1;
-	final static int SPR_GROUND = SPR_BGR_5 + 1;
-	final static int SPR_STAR0 = SPR_GROUND + 1;
-	final static int SPR_STAR1 = SPR_STAR0 + 1;
-	final static int SPR_STAR2 = SPR_STAR1 + 1;
-	final static int SPR_STAR3 = SPR_STAR2 + 1;
-	final static int SPR_GUN = SPR_STAR3 + 1;
+	final static int SPR_BGR = SPR_BTN_PAUSE_DOWN + 1;
+	final static int SPR_GUN = SPR_BGR + 1;
 	final static int SPR_GUN_FIRE = SPR_GUN + 1;
 	final static int SPR_BALLOON = SPR_GUN_FIRE + 1;
 	final static int SPR_BALLOON_BURN = SPR_BALLOON + 1;
-	final static int SPR_MAX = SPR_BALLOON_BURN + 1;
+	final static int SPR_BULLET = SPR_BALLOON_BURN + 1;
+	final static int SPR_BULLET_BURN = SPR_BULLET + 1;
+	final static int SPR_MAX = SPR_BULLET_BURN + 1;
 	
 //define for string
 	final String TXT_TOUCH_TO_CONTINUE = "TOUCH ON SCREEN TO CONTINUE";

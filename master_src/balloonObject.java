@@ -19,13 +19,13 @@ public class balloonObject extends movableObject{
 
 	private char _char;
 
-	public balloonObject(mySprites spr1, mySprites spr2, char c, int x, int y, float angle, float speed) {
-		super(spr1, spr2, -1, x, y, angle, speed);
+	public balloonObject(mySprites spr1, mySprites spr2, char c, int x, int y, int vx, int vy) {
+		super(spr1, spr2, -1, x, y, vx, vy);
 		_char = c;
 	}
 	
-	public balloonObject(mySprites spr1, mySprites spr2, int id, int x, int y, float angle, float speed) {
-		super(spr1, spr2, id, x, y, angle, speed);
+	public balloonObject(mySprites spr1, mySprites spr2, int id, int x, int y, int vx, int vy) {
+		super(spr1, spr2, id, x, y, vx, vy);
 		_char = ' ';
 	}
 	
@@ -43,12 +43,27 @@ public class balloonObject extends movableObject{
 		super((movableObject)other);
 		this._char = other._char;
 	}
+	
+	public char getChar()
+	{
+		return _char;
+	}
+	
+	public void setChar(char c)
+	{
+		_char = c;
+	}
+	
+	@Override
+	public int getType()
+	{
+		return 0;
+	}
 	@Override
 	public void updatePos() {
-		int vx = (int)(this.speed*this.angle);
-		int vy = (int)(this.speed/this.angle);
 		this.x = this.x + vx;
-		this.y = this.y - vy;
+		this.y = this.y + vy;		
+		Untils.Dbg("x:"+x+" y:"+y+" vx:"+vx+" vy:"+vy);
 	}
 	@Override	
 	public void draw(Canvas canvas) {
