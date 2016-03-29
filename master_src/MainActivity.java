@@ -22,6 +22,7 @@ import android.content.SharedPreferences.Editor;
 import android.graphics.Rect;
 #endif
 import java.util.*;
+import android.graphics.Movie;
 
 import Untils.Untils;
 import Untils.myButtons;

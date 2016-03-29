@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.graphics.Color;
 import android.content.Context;
 import java.lang.Math;
+import java.util.Random;
 
 import Untils.mySprites;
 import Untils.Untils;
@@ -53,7 +54,12 @@ public class balloonObject extends movableObject{
 	{
 		_char = c;
 	}
-	
+	public boolean equals(balloonObject other)
+	{
+		if(getChar() == other.getChar())
+			return true;
+		return false;
+	}
 	@Override
 	public int getType()
 	{
@@ -61,6 +67,8 @@ public class balloonObject extends movableObject{
 	}
 	@Override
 	public void updatePos() {
+		Random r = new Random();
+		// this.x = this.x + vx  + r.nextInt(4) - 2;
 		this.x = this.x + vx;
 		this.y = this.y + vy;		
 		Untils.Dbg("x:"+x+" y:"+y+" vx:"+vx+" vy:"+vy);

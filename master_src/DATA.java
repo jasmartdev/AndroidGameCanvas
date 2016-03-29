@@ -15,8 +15,12 @@ public interface DATA {
 	final static int SPR_BGR = SPR_BTN_PAUSE_DOWN + 1;
 	final static int SPR_GUN = SPR_BGR + 1;
 	final static int SPR_GUN_FIRE = SPR_GUN + 1;
-	final static int SPR_BALLOON = SPR_GUN_FIRE + 1;
-	final static int SPR_BALLOON_BURN = SPR_BALLOON + 1;
+	final static int SPR_BALLOON1 = SPR_GUN_FIRE + 1;
+	final static int SPR_BALLOON2 = SPR_BALLOON1 + 1;
+	final static int SPR_BALLOON3 = SPR_BALLOON2 + 1;
+	final static int SPR_BALLOON4 = SPR_BALLOON3 + 1;
+	final static int SPR_BALLOON5 = SPR_BALLOON4 + 1;
+	final static int SPR_BALLOON_BURN = SPR_BALLOON5 + 1;
 	final static int SPR_BULLET = SPR_BALLOON_BURN + 1;
 	final static int SPR_BULLET_BURN = SPR_BULLET + 1;
 	final static int SPR_MAX = SPR_BULLET_BURN + 1;

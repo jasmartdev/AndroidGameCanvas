@@ -93,13 +93,13 @@ public class movableObject {
 	public void setState(int state) {
 		this.state = state;
 	}
-	public double getVx() {
+	public int getVx() {
 		return vx;
 	}
 	public void setVx(int vx) {
 		this.vx = vx;
 	}
-	public float getVy() {
+	public int getVy() {
 		return vy;
 	}
 	public void setVy(int vy) {
@@ -170,17 +170,18 @@ public class movableObject {
 		this.sprBurn.setLoop(1);
 		this.sprNormal.setLoop(-1);
 	}
-	public void update(boolean touch, int x, int y) {
+	public void burn()
+	{
+		setState(objState.BURN);
+	}
+	public void destroy()
+	{
+		setState(objState.DESTROY);
+	}
+	public void update() {
 		if(getState() == objState.FLY)
 		{
 			sprNormal.update();
-			if(touch)
-			{
-				if(Untils.isTouchInRect(x, y, curRect))
-				{
-					setState(objState.BURN);
-				}
-			}
 			updatePos();
 			updateRect();
 		}

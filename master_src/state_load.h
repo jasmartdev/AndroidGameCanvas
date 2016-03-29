@@ -151,10 +151,30 @@ public void s_game_STATE_LOAD(int state)
 							s_gameSprites[DATA.SPR_GUN] = new mySprites(R.drawable.gun, 0, Define.GUN_Y);
 							s_gameSprites[DATA.SPR_GUN].Load(s_mainActive.getApplicationContext());
 						}
-						if(s_gameSprites[DATA.SPR_BALLOON] == null)
+						if(s_gameSprites[DATA.SPR_BALLOON1] == null)
 						{
-							s_gameSprites[DATA.SPR_BALLOON] = new mySprites(R.drawable.balloon, 0, 0, 5);
-							s_gameSprites[DATA.SPR_BALLOON].Load(s_mainActive.getApplicationContext());
+							s_gameSprites[DATA.SPR_BALLOON1] = new mySprites(R.drawable.balloon1, 0, 0, 9);
+							s_gameSprites[DATA.SPR_BALLOON1].Load(s_mainActive.getApplicationContext());
+						}
+						if(s_gameSprites[DATA.SPR_BALLOON2] == null)
+						{
+							s_gameSprites[DATA.SPR_BALLOON2] = new mySprites(R.drawable.balloon2, 0, 0, 9);
+							s_gameSprites[DATA.SPR_BALLOON2].Load(s_mainActive.getApplicationContext());
+						}
+						if(s_gameSprites[DATA.SPR_BALLOON3] == null)
+						{
+							s_gameSprites[DATA.SPR_BALLOON3] = new mySprites(R.drawable.balloon3, 0, 0, 9);
+							s_gameSprites[DATA.SPR_BALLOON3].Load(s_mainActive.getApplicationContext());
+						}
+						if(s_gameSprites[DATA.SPR_BALLOON4] == null)
+						{
+							s_gameSprites[DATA.SPR_BALLOON4] = new mySprites(R.drawable.balloon4, 0, 0, 9);
+							s_gameSprites[DATA.SPR_BALLOON4].Load(s_mainActive.getApplicationContext());
+						}
+						if(s_gameSprites[DATA.SPR_BALLOON5] == null)
+						{
+							s_gameSprites[DATA.SPR_BALLOON5] = new mySprites(R.drawable.balloon5, 0, 0, 9);
+							s_gameSprites[DATA.SPR_BALLOON5].Load(s_mainActive.getApplicationContext());
 						}
 						if(s_gameSprites[DATA.SPR_BALLOON_BURN] == null)
 						{
@@ -171,6 +191,17 @@ public void s_game_STATE_LOAD(int state)
 							s_gameSprites[DATA.SPR_BULLET_BURN] = new mySprites(R.drawable.balloon_burn, 0, 0, 6);
 							s_gameSprites[DATA.SPR_BULLET_BURN].Load(s_mainActive.getApplicationContext());
 						}
+						break;
+					case 2:
+						java.io.InputStream is;
+						is = s_mainActive.getApplicationContext().getResources().openRawResource(R.drawable.daibac2);
+						s_gun = Movie.decodeStream(is);
+						try {
+							is.close();
+						} catch (java.io.IOException e) {
+							Untils.Dbg("Load gif fail");
+						}
+						s_bullet = new bulletObject(s_gameSprites[DATA.SPR_BULLET], s_gameSprites[DATA.SPR_BULLET_BURN], Define.BULLET_X, Define.BULLET_Y);
 						break;
 					default:
 				}

@@ -64,18 +64,24 @@ interface dialogID {
 }
 
 interface Define {
-	final static int NUM_DIS_MAX = 5;
-	final static int NUM_DIS_LEVEL = 5;
-	final static int BASE_ANGLE = 2;
-	final static int ANGLE_DELTA = 2;
-	final static int BASE_SPEED = 2;
-	final static float SPEED_DELTA = 0.5f;
-	final static int BASE_START_X = SCREEN_WIDTH>>1;
-	final static int BASE_START_Y = SCREEN_HEIGHT + 20;
-	final static int START_Y_DELTA = 30;
-	final static float NUM_STAR1 = 0.6f;
-	final static float NUM_STAR2 = 0.75f;
-	final static float NUM_STAR3 = 0.9f;
+
+	final static int GAMEPLAY_X = 50;
+	final static int GAMEPLAY_Y = 50;
+	final static int GAMEPLAY_W = SCREEN_WIDTH - (GAMEPLAY_X<<1);
+	final static int GAMEPLAY_H = SCREEN_HEIGHT - (GAMEPLAY_Y<<1);
+	final static int BALL_NUM = 4;
+	final static int BALL_SPEED_Y = -3;
+	final static int BALL_SPEED_DELTA_Y = 2;
+	final static int BALL_SPEED_DELTA_X = 4;
+	final static int BALL_START_X = GAMEPLAY_X;
+	final static int BALL_START_DELTA_X = (SCREEN_WIDTH - (BALL_START_X<<1))/BALL_NUM;
+	final static int BALL_START_OFF_X = BALL_START_DELTA_X>>1;
+	final static int BALL_START_Y = SCREEN_HEIGHT + 2;
+	final static int GUN_X = SCREEN_WIDTH>>1;
+	final static int GUN_Y = SCREEN_HEIGHT - 250;
+	final static int BULLET_X = SCREEN_WIDTH>>1;
+	final static int BULLET_Y = SCREEN_HEIGHT + 2;
+	
 	final static int LOGO_FRAME = 100;
 	
 	final static int BTN_PLAY_Y = 10;
@@ -91,10 +97,10 @@ interface Define {
 	final static int BTN_MUSIC_X = SCREEN_WIDTH - 10;
 	final static int BTN_SFX_X = SCREEN_WIDTH - 10 - 50;
 	
-	final static int TEXT_SIZE_SMALL = 20;
-	final static int TEXT_SIZE_MED = TEXT_SIZE_SMALL + 6;
-	final static int TEXT_SIZE_LARGE = TEXT_SIZE_MED + 8;
-	final static int TEXT_SIZE_VERY_LARGE = TEXT_SIZE_LARGE + 10;
+	final static int TEXT_SIZE_SMALL = SCREEN_HEIGHT>>4;
+	final static int TEXT_SIZE_MED = TEXT_SIZE_SMALL + SCREEN_HEIGHT>>5;
+	final static int TEXT_SIZE_LARGE = TEXT_SIZE_MED + SCREEN_HEIGHT>>5;
+	final static int TEXT_SIZE_VERY_LARGE = TEXT_SIZE_LARGE + SCREEN_HEIGHT>>5;
 	
 	
 	final static int HUD_HP_Y = TEXT_SIZE_MED/2 + 4;
@@ -106,6 +112,10 @@ interface Define {
 	final static int HUD_LEVEL_X = 6;
 	final static int HUD_HEIGHT = 82;
 	
+	final static int ANSWER_X = 40;
+	final static int ANSWER_Y = 40;
+	final static int ANSWER_OFF_X = 40;
+	
 	final static int IGM_TITLE_Y = 60;
 	final static int IGM_BTN_Y = 170;
 	final static int IGM_BTN_H = 120;
@@ -116,12 +126,4 @@ interface Define {
 	final static int RESULT_SCORE_Y = RESULT_HIGHSCORE_Y + TEXT_SIZE_LARGE + 5;
 	final static int RESULT_RATE_ICON_Y = RESULT_TITLE_Y + TEXT_SIZE_LARGE + 12;
 	final static int RESULT_RATE_ICON_X = SCREEN_WIDTH/2 + 20;
-	
-	final static int GROUND_Y = SCREEN_HEIGHT - 253;
-	
-	final static int GUN_Y = SCREEN_HEIGHT - 250;
-	final static int GUN_OFF_X = 50;
-	
-	final static int BLOOD_MAX = 10;
-	final static int BLOOD_PER = 5;
 }
