@@ -42,6 +42,8 @@ public void Game_Init()
 }
 public void Game_Update()
 {
+	s_frameDelta = (int)(System.currentTimeMillis() - s_frameTicker);
+	s_frameTicker = System.currentTimeMillis();
 	if(s_dialog != null && s_dialog.getActive())
 	{
 		s_dialog.update(s_touch.getTouch(), s_touch.getX(), s_touch.getY());

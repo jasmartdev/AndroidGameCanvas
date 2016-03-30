@@ -25,7 +25,7 @@ public void s_game_STATE_PLAY(int state)
 			s_exit_state = true;
 		}
 		updateBalloons();
-		s_bullet.update();
+		s_bullet.update(s_frameDelta);
 	}
 	else if(state == State.PAINT)
 	{
@@ -50,6 +50,7 @@ public void s_game_STATE_PLAY(int state)
 			s_gun.draw(s_canvas, Define.GUN_X, Define.GUN_Y);
 		}
 		Untils.drawRect(s_canvas, s_gameplay_rect);
+		s_gameSprites[DATA.SPR_GUN_FIRE].draw(s_canvas);
 	}
 	else if(state == State.EXIT)
 	{				
@@ -133,9 +134,25 @@ void drawBalloons()
 }
 void updateBalloons()
 {
+	boolean endrow = true;
 	for(balloonObject b: balloons)
 	{
-		if(s_bullet.isFly() && s_bullet.getRect().intersect(b.getRect()))
+		if(b.isDestroy())
+		{
+			b.setY(Define.BALL_START_Y);
+			continue;
+		}
+		endrow = false;
+		if(b.getRect().bottom < 0)
+		{
+			b.destroy();
+			continue;
+		}
+		if(s_bullet.isDestroy())
+		{
+			s_bullet.setY(Define.BULLET_Y);
+		}
+		else if(s_bullet.isFly() && s_bullet.getRect().intersect(b.getRect()))
 		{
 			s_bullet.burn();
 			b.burn();
@@ -149,12 +166,22 @@ void updateBalloons()
 				}
 			}
 		}
-		if(b.getRect().bottom < 0)
-			b.destroy();
 		if(b.getRect().left < s_gameplay_rect.left || b.getRect().right > s_gameplay_rect.right)
+		{
 			b.setVx(-b.getVx());
+		}
 		for(balloonObject b2: balloons)
 		{
+			if(b2.isDestroy())
+			{
+				b2.setY(Define.BALL_START_Y);
+				continue;
+			}
+			if(b2.getRect().bottom < 0)
+			{
+				b2.destroy();
+				continue;
+			}
 			if(!b2.equals(b))
 			{
 				if(b2.getRect().intersect(b.getRect()))
@@ -162,10 +189,15 @@ void updateBalloons()
 					b2.setVx(-b2.getVx());
 					b.setVx(-b.getVx());
 				}
-				b2.update();
+				b2.update(s_frameDelta);
 			}
 		}
-		b.update();
+		b.update(s_frameDelta);
+	}
+	if(endrow)
+	{
+		genBalloons();
+		startBalloons();
 	}
 }
 void resetBullet()
@@ -179,6 +211,6 @@ void startBullet()
 	s_bullet.start();
 	s_bullet.setX(Define.BULLET_X);
 	s_bullet.setY(Define.BULLET_Y);
-	s_bullet.setVx(-1);
-	s_bullet.setVy(-20);
+	// s_bullet.setVx(-1);
+	s_bullet.setVy(Define.BULLET_SPEED);
 }

@@ -66,12 +66,12 @@ public class balloonObject extends movableObject{
 		return 0;
 	}
 	@Override
-	public void updatePos() {
-		Random r = new Random();
-		// this.x = this.x + vx  + r.nextInt(4) - 2;
-		this.x = this.x + vx;
-		this.y = this.y + vy;		
-		Untils.Dbg("x:"+x+" y:"+y+" vx:"+vx+" vy:"+vy);
+	public void updatePos(int delta) {
+		// Random r = new Random();
+		// vx += r.nextInt(Define.BALL_SPEED_DELTA_X + 1) - (Define.BALL_SPEED_DELTA_X>>1);
+		this.x = this.x + (vx*delta)/Config.s_framePeriod;
+		this.y = this.y + (vy*delta)/Config.s_framePeriod;
+		Untils.Dbg("updatePos vx:"+vx+" vy:"+vy+" delta:"+delta);
 	}
 	@Override	
 	public void draw(Canvas canvas) {
@@ -79,6 +79,7 @@ public class balloonObject extends movableObject{
 			sprNormal.draw(canvas, this.x, this.y);
 		else if(getState() == objState.BURN)
 			sprBurn.draw(canvas, this.x, this.y);
-		Untils.drawString(canvas, Character.toString(_char) , getRect().centerX(), getRect().centerY(), Color.WHITE, 28, 0);
+		Untils.drawString(canvas, Character.toString(_char) , getRect().centerX() - 2, getRect().centerY() - 2, Color.WHITE, Define.TEXT_SIZE_LARGE + 4, 0);
+		Untils.drawString(canvas, Character.toString(_char) , getRect().centerX(), getRect().centerY(), Color.BLACK, Define.TEXT_SIZE_LARGE, 0);
 	}
 }

@@ -20,6 +20,8 @@ volatile boolean sfx_enable;
 volatile myTouch s_touch;
 volatile balloonObject[] balloons;
 volatile bulletObject s_bullet;
+volatile int s_bullet_x;
+volatile int s_bullet_y;
 volatile Movie s_gun;
 volatile Rect s_gameplay_rect = new Rect(Define.GAMEPLAY_X, Define.GAMEPLAY_Y, Define.GAMEPLAY_W, Define.GAMEPLAY_H);
 volatile long mMovieStart;

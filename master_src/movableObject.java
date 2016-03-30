@@ -15,7 +15,7 @@ import java.util.*;
 import Untils.mySprites;
 import Untils.Untils;
 
-public class movableObject {
+abstract public class movableObject {
 
 	protected mySprites sprNormal;
 	protected mySprites sprBurn;
@@ -137,11 +137,7 @@ public class movableObject {
 		this.curRect.top = sourceRect.top + (int)this.y;		
 		this.curRect.bottom = sourceRect.bottom + (int)this.y;
 	}
-	public void updatePos() {
-		this.x = this.x + vx;
-		this.y = this.y + vy;
-		Untils.Dbg("x:"+x+" y:"+y+" vx:"+vx+" vy:"+vy);
-	}
+	abstract public void updatePos(int delta);
 	public boolean isInRect(Rect r) {
 		return r.contains(curRect);
 	}
@@ -178,11 +174,11 @@ public class movableObject {
 	{
 		setState(objState.DESTROY);
 	}
-	public void update() {
+	public void update(int delta) {
 		if(getState() == objState.FLY)
 		{
 			sprNormal.update();
-			updatePos();
+			updatePos(delta);
 			updateRect();
 		}
 		else if(getState() == objState.BURN)

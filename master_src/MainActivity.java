@@ -101,10 +101,11 @@ public class MainActivity extends Activity {
 			super(context);
 			surfaceHolder = getHolder();
 			s_game_state = gameState.STATE_INIT;
+			s_frameTicker = System.currentTimeMillis();
 			s_init_state = true;
 			#ifdef USE_BG_BUFFER
 			s_touch = new myTouch((float)SCREEN_WIDTH/SCREEN_WIDTH_PHONE, (float)SCREEN_HEIGHT/SCREEN_HEIGHT_PHONE);
-			s_bg_buffer = Bitmap.createBitmap((int)SCREEN_WIDTH, (int)SCREEN_HEIGHT, Bitmap.Config.ARGB_8888);
+			s_bg_buffer = Bitmap.createBitmap((int)SCREEN_WIDTH, (int)SCREEN_HEIGHT, Bitmap.Config.RGB_565);
 			s_canvas = new Canvas(s_bg_buffer);
 			#else
 			s_touch = new myTouch();

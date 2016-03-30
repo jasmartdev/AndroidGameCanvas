@@ -148,8 +148,13 @@ public void s_game_STATE_LOAD(int state)
 						}
 						if(s_gameSprites[DATA.SPR_GUN] == null)
 						{
-							s_gameSprites[DATA.SPR_GUN] = new mySprites(R.drawable.gun, 0, Define.GUN_Y);
+							s_gameSprites[DATA.SPR_GUN] = new mySprites(R.drawable.gun_1, 0, Define.GUN_Y);
 							s_gameSprites[DATA.SPR_GUN].Load(s_mainActive.getApplicationContext());
+						}
+						if(s_gameSprites[DATA.SPR_GUN_FIRE] == null)
+						{
+							s_gameSprites[DATA.SPR_GUN_FIRE] = new mySprites(R.drawable.gun_1a, 0, Define.GUN_Y, 6);
+							s_gameSprites[DATA.SPR_GUN_FIRE].Load(s_mainActive.getApplicationContext());
 						}
 						if(s_gameSprites[DATA.SPR_BALLOON1] == null)
 						{
