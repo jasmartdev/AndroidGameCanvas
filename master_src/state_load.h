@@ -141,21 +141,20 @@ public void s_game_STATE_LOAD(int state)
 							btn_exit.Scale(SCALE_WIDTH, SCALE_HEIGHT);
 						}
 						break;
-					case 1: //load sprites						
-						if(s_gameSprites[DATA.SPR_BGR] == null)
-						{
-							s_gameSprites[DATA.SPR_BGR] = s_gameSprites[DATA.SPR_SPLASH];
-						}
-						if(s_gameSprites[DATA.SPR_GUN] == null)
-						{
-							s_gameSprites[DATA.SPR_GUN] = new mySprites(R.drawable.gun_1, 0, Define.GUN_Y);
-							s_gameSprites[DATA.SPR_GUN].Load(s_mainActive.getApplicationContext());
-						}
-						if(s_gameSprites[DATA.SPR_GUN_FIRE] == null)
-						{
-							s_gameSprites[DATA.SPR_GUN_FIRE] = new mySprites(R.drawable.gun_1a, 0, Define.GUN_Y, 6);
-							s_gameSprites[DATA.SPR_GUN_FIRE].Load(s_mainActive.getApplicationContext());
-						}
+					case 1: //load sprites
+						// for(int i = DATA.SPR_GUN_FIRST; i <= DATA.SPR_GUN_LAST; i++)
+						// {
+							// if(s_gameSprites[i] == null)
+							// {
+								// s_gameSprites[i] = new mySprites(DATA.gunID[i], 0, Define.GUN_Y);
+								// s_gameSprites[i].Load(s_mainActive.getApplicationContext());
+							// }
+							// if(s_gameSprites[DATA.SPR_GUN_FIRE_FIRST + i] == null)
+							// {
+								// s_gameSprites[DATA.SPR_GUN_FIRE_FIRST + i] = new mySprites(DATA.gunfireID[i], 0, Define.GUN_Y, 6);
+								// s_gameSprites[DATA.SPR_GUN_FIRE_FIRST + i].Load(s_mainActive.getApplicationContext());
+							// }
+						// }
 						if(s_gameSprites[DATA.SPR_BALLOON1] == null)
 						{
 							s_gameSprites[DATA.SPR_BALLOON1] = new mySprites(R.drawable.balloon1, 0, 0, 9);
@@ -198,14 +197,6 @@ public void s_game_STATE_LOAD(int state)
 						}
 						break;
 					case 2:
-						java.io.InputStream is;
-						is = s_mainActive.getApplicationContext().getResources().openRawResource(R.drawable.daibac2);
-						s_gun = Movie.decodeStream(is);
-						try {
-							is.close();
-						} catch (java.io.IOException e) {
-							Untils.Dbg("Load gif fail");
-						}
 						s_bullet = new bulletObject(s_gameSprites[DATA.SPR_BULLET], s_gameSprites[DATA.SPR_BULLET_BURN], Define.BULLET_X, Define.BULLET_Y);
 						break;
 					default:

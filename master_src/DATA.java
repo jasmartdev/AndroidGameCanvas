@@ -12,10 +12,11 @@ public interface DATA {
 	final static int SPR_BTN_PLAY_DOWN = SPR_BTN_PLAY_UP + 1;
 	final static int SPR_BTN_PAUSE_UP = SPR_BTN_PLAY_DOWN + 1;
 	final static int SPR_BTN_PAUSE_DOWN = SPR_BTN_PAUSE_UP + 1;
-	final static int SPR_BGR = SPR_BTN_PAUSE_DOWN + 1;
-	final static int SPR_GUN = SPR_BGR + 1;
-	final static int SPR_GUN_FIRE = SPR_GUN + 1;
-	final static int SPR_BALLOON1 = SPR_GUN_FIRE + 1;
+	final static int SPR_GUN_FIRST = SPR_BTN_PAUSE_DOWN + 1;
+	final static int SPR_GUN_LAST = SPR_GUN_FIRST + 16;
+	final static int SPR_GUN_FIRE_FIRST = SPR_GUN_LAST + 1;
+	final static int SPR_GUN_FIRE_LAST = SPR_GUN_FIRE_FIRST + 16;
+	final static int SPR_BALLOON1 = SPR_GUN_FIRE_LAST + 1;
 	final static int SPR_BALLOON2 = SPR_BALLOON1 + 1;
 	final static int SPR_BALLOON3 = SPR_BALLOON2 + 1;
 	final static int SPR_BALLOON4 = SPR_BALLOON3 + 1;
@@ -55,5 +56,118 @@ public interface DATA {
 		R.raw.sfx_menu_confirm,
 		R.raw.sfx_dis_burn,
 	};
-
+	final static int gunID[] = {
+		R.drawable.gun_1,
+		R.drawable.gun_2,
+		R.drawable.gun_3,
+		R.drawable.gun_4,
+		R.drawable.gun_5,
+		R.drawable.gun_6,
+		R.drawable.gun_7,
+		R.drawable.gun_8,
+		R.drawable.gun_9,
+		R.drawable.gun_10,
+		R.drawable.gun_11,
+		R.drawable.gun_12,
+		R.drawable.gun_13,
+		R.drawable.gun_14,
+		R.drawable.gun_15,
+		R.drawable.gun_16,
+		R.drawable.gun_17,
+	};
+	final static int gunfireID[] = {
+		R.drawable.gun_1a,
+		R.drawable.gun_2a,
+		R.drawable.gun_3a,
+		R.drawable.gun_4a,
+		R.drawable.gun_5a,
+		R.drawable.gun_6a,
+		R.drawable.gun_7a,
+		R.drawable.gun_8a,
+		R.drawable.gun_9a,
+		R.drawable.gun_10a,
+		R.drawable.gun_11a,
+		R.drawable.gun_12a,
+		R.drawable.gun_13a,
+		R.drawable.gun_14a,
+		R.drawable.gun_15a,
+		R.drawable.gun_16a,
+		R.drawable.gun_17a,
+	};
+	final static int bulletStartX[] = {
+		Define.BULLET_X - 160,
+		Define.BULLET_X - 140,
+		Define.BULLET_X - 120,
+		Define.BULLET_X - 100,
+		Define.BULLET_X - 80,
+		Define.BULLET_X - 60,
+		Define.BULLET_X - 40,
+		Define.BULLET_X - 20,
+		Define.BULLET_X,
+		Define.BULLET_X + 20,
+		Define.BULLET_X + 40,
+		Define.BULLET_X + 60,
+		Define.BULLET_X + 80,
+		Define.BULLET_X + 100,
+		Define.BULLET_X + 120,
+		Define.BULLET_X + 140,
+		Define.BULLET_X + 160,
+	};
+	final static int bulletStartY[] = {
+		Define.BULLET_Y - 160,
+		Define.BULLET_Y - 140,
+		Define.BULLET_Y - 120,
+		Define.BULLET_Y - 100,
+		Define.BULLET_Y - 80,
+		Define.BULLET_Y - 60,
+		Define.BULLET_Y - 40,
+		Define.BULLET_Y - 20,
+		Define.BULLET_Y,
+		Define.BULLET_Y + 20,
+		Define.BULLET_Y + 40,
+		Define.BULLET_Y + 60,
+		Define.BULLET_Y + 80,
+		Define.BULLET_Y + 100,
+		Define.BULLET_Y + 120,
+		Define.BULLET_Y + 140,
+		Define.BULLET_Y + 160,
+	};
+	final static int bulletSpeedX[] = {
+		-8,
+		-7,
+		-6,
+		-5,
+		-4,
+		-3,
+		-2,
+		-1,
+		0,
+		1,
+		2,
+		3,
+		4,
+		5,
+		6,
+		7,
+		8,
+	};
+	final static int bulletSpeedY[] = {
+		Define.BULLET_SPEED-8,
+		Define.BULLET_SPEED-7,
+		Define.BULLET_SPEED-6,
+		Define.BULLET_SPEED-5,
+		Define.BULLET_SPEED-4,
+		Define.BULLET_SPEED-3,
+		Define.BULLET_SPEED-2,
+		Define.BULLET_SPEED-1,
+		Define.BULLET_SPEED,
+		Define.BULLET_SPEED-1,
+		Define.BULLET_SPEED-2,
+		Define.BULLET_SPEED-3,
+		Define.BULLET_SPEED-4,
+		Define.BULLET_SPEED-5,
+		Define.BULLET_SPEED-6,
+		Define.BULLET_SPEED-7,
+		Define.BULLET_SPEED-8,
+	};
 }

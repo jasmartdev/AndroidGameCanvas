@@ -26,6 +26,7 @@ if "%BUILD_MODE%"=="release" (
 	%JAVA_HOME%\bin\jarsigner.exe -verbose -keystore %KEY_ALIAS%_KEY.keystore -storepass %KEY_PASS% -keypass %KEY_PASS% %PRJ_DIR%\bin\%PRJ_NAME%-release-unsigned.apk %KEY_ALIAS%
 )
 if "%BUILD_MODE%"=="debug" (
+	del *.apk
 	echo *** preprocess source ***
 	if exist tmp rd /s /q tmp
 	md tmp

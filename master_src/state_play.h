@@ -9,7 +9,7 @@ public void s_game_STATE_PLAY(int state)
 		genBalloons();
 		resetBullet();
 		startBalloons();
-		mMovieStart = 0;
+		s_gun_angle = 9;
 	}
 	else if(state == State.UPDATE)
 	{
@@ -25,32 +25,18 @@ public void s_game_STATE_PLAY(int state)
 			s_exit_state = true;
 		}
 		updateBalloons();
+		updateGun();
 		s_bullet.update(s_frameDelta);
 	}
 	else if(state == State.PAINT)
 	{
-		s_gameSprites[DATA.SPR_BGR].draw(s_canvas);
+		s_gameSprites[DATA.SPR_SPLASH].draw(s_canvas);
+		paint_HUD();
+		drawGun();
+		btn_gamePause.draw(s_canvas);
 		drawBalloons();
 		s_bullet.draw(s_canvas);
-		paint_HUD();
-		btn_gamePause.draw(s_canvas);
-		long now = android.os.SystemClock.uptimeMillis();
-		if (mMovieStart == 0) {
-			mMovieStart = now;
-		}
-		if (s_gun != null) {
-			int dur = s_gun.duration();
-			Untils.Dbg("s_gun dur:"+dur);
-			if (dur == 0) {
-				dur = 1000;
-			}
-			int relTime = (int) ((now - mMovieStart) % dur);
-			Untils.Dbg("s_gun relTime:"+relTime);
-			s_gun.setTime(relTime);
-			s_gun.draw(s_canvas, Define.GUN_X, Define.GUN_Y);
-		}
 		Untils.drawRect(s_canvas, s_gameplay_rect);
-		s_gameSprites[DATA.SPR_GUN_FIRE].draw(s_canvas);
 	}
 	else if(state == State.EXIT)
 	{				
@@ -209,8 +195,30 @@ void resetBullet()
 void startBullet()
 {
 	s_bullet.start();
-	s_bullet.setX(Define.BULLET_X);
-	s_bullet.setY(Define.BULLET_Y);
-	// s_bullet.setVx(-1);
-	s_bullet.setVy(Define.BULLET_SPEED);
+	s_bullet.setX(DATA.bulletStartX[s_gun_angle]);
+	s_bullet.setY(DATA.bulletStartY[s_gun_angle]);
+	s_bullet.setVx(DATA.bulletSpeedX[s_gun_angle]);
+	s_bullet.setVy(DATA.bulletSpeedY[s_gun_angle]);
+}
+void updateGun()
+{
+	if(s_touch.getDrag())
+	{
+		if(s_touch.getDragDeltaX() > 0)
+		{
+			if(s_gun_angle < 16)
+				s_gun_angle++;
+		}
+		else
+		{
+			if(s_gun_angle > 0)
+				s_gun_angle--;
+		}
+	}
+}
+void drawGun()
+{
+	mySprites gun = new mySprites(DATA.gunID[s_gun_angle], Define.GUN_X, Define.GUN_Y);
+	gun.Load(s_mainActive.getApplicationContext());
+	gun.draw(s_canvas);
 }
