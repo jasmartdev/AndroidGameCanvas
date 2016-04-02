@@ -67,14 +67,10 @@ void genQuestion()
 void genBalloons()
 {
 	List<Character> answer = new ArrayList<Character>();
-	for(char c: s_answer)
+	for(int i = 0; i < s_answer.length; i++)
 	{
-		answer.add(c);
-	}
-	for(char c: s_answer_collected)
-	{
-		if(answer.contains(c))
-			answer.remove(c);
+		if(!s_answer_map[i])
+			answer.add(s_answer[i]);
 	}
 	boolean isInAns = false;
 	int num = Define.BALL_NUM;

@@ -18,11 +18,14 @@ public interface Define {
 	final static int BALL_START_DELTA_X = (SCREEN_WIDTH - (BALL_START_X<<1))/BALL_NUM;
 	final static int BALL_START_OFF_X = BALL_START_DELTA_X>>1;
 	final static int BALL_START_Y = SCREEN_HEIGHT + 2;
-	final static int GUN_X = (SCREEN_WIDTH>>1) - 572;
+	final static int GUN_X = (SCREEN_WIDTH>>1) - 560;
 	final static int GUN_Y = SCREEN_HEIGHT - 1015;
 	final static int BULLET_X = SCREEN_WIDTH>>1;
 	final static int BULLET_Y = SCREEN_HEIGHT + 2;
+	final static int BULLET_START_X = GUN_X + 560;
+	final static int BULLET_START_Y = GUN_Y + 300;
 	final static int BULLET_SPEED = -40;
+	final static int BULLET_SPEED_RO = 4;
 	
 	final static int LOGO_FRAME = 100;
 	
