@@ -13,8 +13,8 @@ import android.content.Context;
 import java.lang.Math;
 import java.util.Random;
 
-import Untils.mySprites;
-import Untils.Untils;
+import jasmartdev.untils.mySprites;
+import jasmartdev.untils.Untils;
 
 public class balloonObject extends movableObject{
 

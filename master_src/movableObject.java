@@ -12,8 +12,8 @@ import android.content.Context;
 import java.lang.Math;
 import java.util.*;
 
-import Untils.mySprites;
-import Untils.Untils;
+import jasmartdev.untils.mySprites;
+import jasmartdev.untils.Untils;
 
 abstract public class movableObject {
 

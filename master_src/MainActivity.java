@@ -24,13 +24,13 @@ import android.graphics.Rect;
 import java.util.*;
 import android.graphics.Movie;
 
-import Untils.Untils;
-import Untils.myButtons;
-import Untils.mySprites;
-import Untils.myTouch;
-import Untils.Align;
-import Untils.mySound;
-import Untils.myDialog;
+import jasmartdev.untils.Untils;
+import jasmartdev.untils.myButtons;
+import jasmartdev.untils.mySprites;
+import jasmartdev.untils.myTouch;
+import jasmartdev.untils.Align;
+import jasmartdev.untils.mySound;
+import jasmartdev.untils.myDialog;
 
 
 public class MainActivity extends Activity {

@@ -11,8 +11,8 @@ import android.graphics.Rect;
 import android.content.Context;
 import java.lang.Math;
 
-import Untils.mySprites;
-import Untils.Untils;
+import jasmartdev.untils.mySprites;
+import jasmartdev.untils.Untils;
 
 public class myDis {
 
