@@ -17,18 +17,14 @@ import jasmartdev.untils.Untils;
 
 public class bulletObject extends movableObject{
 
-	public bulletObject(mySprites spr1, mySprites spr2, int x, int y, int vx, int vy) {
+	public bulletObject(final mySprites spr1, final mySprites spr2, int x, int y, int vx, int vy) {
 		super(spr1, spr2, -1, x, y, vx, vy);
 	}
 	
-	public bulletObject(mySprites spr1, mySprites spr2, int x, int y) {
+	public bulletObject(final mySprites spr1, final mySprites spr2, int x, int y) {
 		super(spr1, spr2, x, y);
 	}
 
-	public bulletObject(bulletObject other) {
-		super((movableObject)other);
-	}
-	
 	@Override
 	public void updatePos(int delta) {
 		this.x = this.x + vx*delta/Config.s_framePeriod;

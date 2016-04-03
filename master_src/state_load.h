@@ -187,7 +187,7 @@ public void s_game_STATE_LOAD(int state)
 						}
 						if(s_gameSprites[DATA.SPR_BULLET] == null)
 						{
-							s_gameSprites[DATA.SPR_BULLET] = new mySprites(R.drawable.bullet, 0, 0, 6);
+							s_gameSprites[DATA.SPR_BULLET] = new mySprites(R.drawable.bullet, 0, 0);
 							s_gameSprites[DATA.SPR_BULLET].Load(s_mainActive.getApplicationContext());
 						}
 						if(s_gameSprites[DATA.SPR_BULLET_BURN] == null)
@@ -198,6 +198,8 @@ public void s_game_STATE_LOAD(int state)
 						break;
 					case 2:
 						s_bullet = new bulletObject(s_gameSprites[DATA.SPR_BULLET], s_gameSprites[DATA.SPR_BULLET_BURN], Define.BULLET_X, Define.BULLET_Y);
+						s_gun = new mySprites(DATA.gunID[Define.GUN_ANGLE_CENTER], Define.GUN_X, Define.GUN_Y);
+						s_gun.Load(s_mainActive.getApplicationContext());
 						break;
 					default:
 				}

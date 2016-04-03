@@ -11,21 +11,28 @@ public interface Define {
 	final static int GAMEPLAY_W = SCREEN_WIDTH - (GAMEPLAY_X<<1);
 	final static int GAMEPLAY_H = SCREEN_HEIGHT - (GAMEPLAY_Y<<1);
 	final static int BALL_NUM = 4;
-	final static int BALL_SPEED_Y = -3;
+	final static int BALL_SPEED_Y = -9;
 	final static int BALL_SPEED_DELTA_Y = 2;
 	final static int BALL_SPEED_DELTA_X = 2;
 	final static int BALL_START_X = GAMEPLAY_X;
 	final static int BALL_START_DELTA_X = (SCREEN_WIDTH - (BALL_START_X<<1))/BALL_NUM;
-	final static int BALL_START_OFF_X = BALL_START_DELTA_X>>1;
+	final static int BALL_START_OFF_X = BALL_START_DELTA_X>>2;
 	final static int BALL_START_Y = SCREEN_HEIGHT + 2;
+	final static int BALL_RECY_OFF_Y = -150;
 	final static int GUN_X = (SCREEN_WIDTH>>1) - 560;
 	final static int GUN_Y = SCREEN_HEIGHT - 1015;
+	final static int GUN_RECT_X = (SCREEN_WIDTH>>1) - 400;
+	final static int GUN_RECT_Y = SCREEN_HEIGHT - 800;
+	final static int GUN_RECT_W = GUN_RECT_X + 800;
+	final static int GUN_RECT_H = GUN_RECT_Y + 800;
+	final static int GUN_ANGLE_CENTER = 8;
+	final static int GUN_ANGLE_MAX = 16;
 	final static int BULLET_X = SCREEN_WIDTH>>1;
 	final static int BULLET_Y = SCREEN_HEIGHT + 2;
 	final static int BULLET_START_X = GUN_X + 560;
 	final static int BULLET_START_Y = GUN_Y + 300;
 	final static int BULLET_SPEED = -40;
-	final static int BULLET_SPEED_RO = 4;
+	final static int BULLET_SPEED_RO = 3;
 	
 	final static int LOGO_FRAME = 100;
 	

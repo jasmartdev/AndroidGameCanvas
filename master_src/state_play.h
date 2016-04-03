@@ -9,12 +9,11 @@ public void s_game_STATE_PLAY(int state)
 		genBalloons();
 		resetBullet();
 		startBalloons();
-		s_gun_angle = 9;
+		s_gun_angle = Define.GUN_ANGLE_CENTER;
+		s_gun_fire = 0;
 	}
 	else if(state == State.UPDATE)
 	{
-		if(s_touch.getTouch())
-			startBullet();
 		if(s_bullet.isDestroy())
 			resetBullet();
 		btn_gamePause.update(s_touch.getTouch(), s_touch.getX(), s_touch.getY());
@@ -122,6 +121,7 @@ void updateBalloons()
 		if(b.isDestroy())
 		{
 			b.setY(Define.BALL_START_Y);
+			b.updateRect();
 			continue;
 		}
 		endrow = false;
@@ -133,6 +133,7 @@ void updateBalloons()
 		if(s_bullet.isDestroy())
 		{
 			s_bullet.setY(Define.BULLET_Y);
+			s_bullet.updateRect();
 		}
 		else if(s_bullet.isFly() && s_bullet.getRect().intersect(b.getRect()))
 		{
@@ -157,6 +158,7 @@ void updateBalloons()
 			if(b2.isDestroy())
 			{
 				b2.setY(Define.BALL_START_Y);
+				b2.updateRect();
 				continue;
 			}
 			if(b2.getRect().bottom < 0)
@@ -171,7 +173,6 @@ void updateBalloons()
 					b2.setVx(-b2.getVx());
 					b.setVx(-b.getVx());
 				}
-				b2.update(s_frameDelta);
 			}
 		}
 		b.update(s_frameDelta);
@@ -195,6 +196,7 @@ void startBullet()
 	s_bullet.setY(DATA.bulletStartY[s_gun_angle]);
 	s_bullet.setVx(DATA.bulletSpeedX[s_gun_angle]);
 	s_bullet.setVy(DATA.bulletSpeedY[s_gun_angle]);
+	s_gun_fire = 0;
 }
 void updateGun()
 {
@@ -202,7 +204,7 @@ void updateGun()
 	{
 		if(s_touch.getDragDeltaX() > 0)
 		{
-			if(s_gun_angle < 16)
+			if(s_gun_angle < Define.GUN_ANGLE_MAX)
 				s_gun_angle++;
 		}
 		else
@@ -211,10 +213,85 @@ void updateGun()
 				s_gun_angle--;
 		}
 	}
+	Rect r = new Rect(Define.GUN_RECT_X, Define.GUN_RECT_Y, Define.GUN_RECT_W, Define.GUN_RECT_H);
+	if(s_bullet.isFly() && !s_gameplay_rect.contains(s_bullet.getRect()))
+	{
+		s_bullet.destroy();
+	}
+	else if(!s_bullet.isFly() && s_touch.getTouch() && r.contains(s_touch.getX(), s_touch.getY()))
+	{
+		Untils.Dbg("+++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		startBullet();
+		s_gun = new mySprites(DATA.gunfireID[s_gun_angle], Define.GUN_X, Define.GUN_Y);
+		s_gun.Load(s_mainActive.getApplicationContext());
+		s_gun_fire = 6;
+	}
+	if(s_gun_fire > 0)
+		s_gun_fire--;
 }
 void drawGun()
 {
-	mySprites gun = new mySprites(DATA.gunID[s_gun_angle], Define.GUN_X, Define.GUN_Y);
-	gun.Load(s_mainActive.getApplicationContext());
-	gun.draw(s_canvas);
+	if(s_gun_fire == 0)
+	{
+		s_gun = new mySprites(DATA.gunID[s_gun_angle], Define.GUN_X, Define.GUN_Y);
+		s_gun.Load(s_mainActive.getApplicationContext());
+	}
+	s_gun.draw(s_canvas);
+	float startX = (float)DATA.bulletStartX[s_gun_angle];
+	float startY = (float)DATA.bulletStartY[s_gun_angle];
+	float deltaX;
+	float deltaY;
+	float endX;
+	float endY;
+	Untils.Dbg("s_gun_angle:"+s_gun_angle);
+	if(s_gun_angle > Define.GUN_ANGLE_CENTER)
+	{
+		deltaX = Define.SCREEN_WIDTH - Define.GAMEPLAY_X - startX;
+		deltaY = (deltaX*DATA.bulletSpeedY[s_gun_angle]/DATA.bulletSpeedX[s_gun_angle]);
+		endY = startY + deltaY;
+		Untils.Dbg("111 deltaX:"+deltaX+" deltaY:"+deltaY+" endY:"+endY);
+		if(endY < Define.GAMEPLAY_Y)
+		{
+			endY = Define.GAMEPLAY_Y;
+			deltaX = (deltaY*DATA.bulletSpeedX[s_gun_angle]/DATA.bulletSpeedY[s_gun_angle]);
+			endX = startX + deltaX;
+			Untils.Dbg("222 deltaX:"+deltaX+" deltaY:"+deltaY+" endY:"+endY+" endX:"+endX);
+		}
+		else
+		{
+			endX = Define.SCREEN_WIDTH - Define.GAMEPLAY_X;
+			Untils.Dbg("333 deltaX:"+deltaX+" deltaY:"+deltaY+" endY:"+endY+" endX:"+endX);
+		}
+	}
+	else if(s_gun_angle < Define.GUN_ANGLE_CENTER)
+	{
+		deltaX = startX - Define.GAMEPLAY_X;
+		deltaY = (deltaX*DATA.bulletSpeedY[s_gun_angle]/DATA.bulletSpeedX[s_gun_angle]);
+		endY = startY - deltaY;
+		Untils.Dbg("444 deltaX:"+deltaX+" deltaY:"+deltaY+" endY:"+endY);
+		if(endY < Define.GAMEPLAY_Y)
+		{
+			endY = Define.GAMEPLAY_Y;
+			deltaX = (deltaY*DATA.bulletSpeedX[s_gun_angle]/DATA.bulletSpeedY[s_gun_angle]);
+			endX = startX + deltaX;
+			Untils.Dbg("555 deltaX:"+deltaX+" deltaY:"+deltaY+" endY:"+endY+" endX:"+endX);
+		}
+		else
+		{
+			endX = Define.GAMEPLAY_X;
+			Untils.Dbg("666 deltaX:"+deltaX+" deltaY:"+deltaY+" endY:"+endY+" endX:"+endX);
+		}
+	}
+	else
+	{
+		endX = startX + 1;
+		endY = Define.GAMEPLAY_Y;
+		Untils.Dbg("777 endY:"+endY+" endX:"+endX);
+	}
+	Paint myPaint = new Paint();
+	myPaint.setColor(Color.RED);
+	myPaint.setStyle(Paint.Style.FILL);
+	myPaint.setStrokeWidth(6);
+	s_canvas.drawLine(startX, startY, endX, endY, myPaint);
+	Untils.drawRect(s_canvas, new Rect(Define.GUN_RECT_X, Define.GUN_RECT_Y, Define.GUN_RECT_W, Define.GUN_RECT_H));
 }

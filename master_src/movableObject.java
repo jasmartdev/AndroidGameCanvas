@@ -27,7 +27,6 @@ abstract public class movableObject {
 	protected int vy;
 	protected int ID;
 	protected int state;
-	public static HashSet<movableObject> allObject = new HashSet<movableObject>();
 	
 	interface objState {
 		final static int NONE = 0;
@@ -36,7 +35,7 @@ abstract public class movableObject {
 		final static int DESTROY = 3;
 	}
 
-	public movableObject(mySprites spr1, mySprites spr2, int id, int x, int y, int vx, int vy) {
+	public movableObject(final mySprites spr1, final mySprites spr2, int id, int x, int y, int vx, int vy) {
 		this.sprNormal = spr1;
 		this.sprBurn = spr2;
 		this.ID = id;
@@ -45,11 +44,9 @@ abstract public class movableObject {
 		this.vx = vx;
 		this.vy = vy;
 		reset();
-		if(!allObject.contains(this))
-			allObject.add(this);
 	}
 	
-	public movableObject(mySprites spr1, mySprites spr2, int x, int y) {
+	public movableObject(final mySprites spr1, final mySprites spr2, int x, int y) {
 		this.sprNormal = spr1;
 		this.sprBurn = spr2;
 		this.ID = -1;
@@ -58,23 +55,8 @@ abstract public class movableObject {
 		this.vx = 0;
 		this.vy = 0;
 		reset();
-		if(!allObject.contains(this))
-			allObject.add(this);
 	}
-	
-	public movableObject(movableObject other) {
-		this.sprNormal = new mySprites(other.sprNormal);
-		this.sprBurn = new mySprites(other.sprBurn);
-		this.ID = other.ID;
-		this.x = other.x;
-		this.y = other.y;
-		this.vx = other.vx;
-		this.vy = other.vy;
-		reset();
-		if(!allObject.contains(this))
-			allObject.add(this);
-	}
-	
+
 	public Rect getRect() {
 		return new Rect(curRect);
 	}
@@ -127,15 +109,9 @@ abstract public class movableObject {
 	{
 		return -1;
 	}
-	public static HashSet<movableObject> getAllObject()
-	{
-		return allObject;
-	}
 	public void updateRect() {
-		this.curRect.left = sourceRect.left + (int)this.x;
-		this.curRect.right = sourceRect.right + (int)this.x;
-		this.curRect.top = sourceRect.top + (int)this.y;		
-		this.curRect.bottom = sourceRect.bottom + (int)this.y;
+		curRect = new Rect(sourceRect);
+		curRect.offset(this.x, this.y);
 	}
 	abstract public void updatePos(int delta);
 	public boolean isInRect(Rect r) {
@@ -156,15 +132,14 @@ abstract public class movableObject {
 	}
 	public void reset()
 	{
-		sourceRect =  new Rect(sprNormal.getRect());
-		curRect = new Rect();
-		this.curRect.left = sourceRect.left + (int)this.x;
-		this.curRect.right = sourceRect.right + (int)this.x;
-		this.curRect.top = sourceRect.top + (int)this.y;		
-		this.curRect.bottom = sourceRect.bottom + (int)this.y;
+		sprNormal.reset();
+		sourceRect =  sprNormal.getRect();
+		Untils.Dbg("reset sourceRect.left"+sourceRect.left+" sprNormal:"+sprNormal);
+		curRect = new Rect(sourceRect);
+		curRect.offset(this.x, this.y);
 		setState(objState.NONE);
-		this.sprBurn.setLoop(1);
-		this.sprNormal.setLoop(-1);
+		sprBurn.setLoop(1);
+		sprNormal.setLoop(-1);
 	}
 	public void burn()
 	{
