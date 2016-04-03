@@ -56,7 +56,7 @@ void paint_HUD()
 		if(s_answer_map[i])
 			Untils.drawString(s_canvas, String.valueOf(s_answer[i]), Define.ANSWER_X + Define.ANSWER_OFF_X*i, Define.ANSWER_Y, Color.BLUE, Define.TEXT_SIZE_MED, Align.LEFT);
 		else
-			Untils.drawString(s_canvas, String.valueOf(s_answer[i]), Define.ANSWER_X + Define.ANSWER_OFF_X*i, Define.ANSWER_Y, Color.WHITE, Define.TEXT_SIZE_MED, Align.LEFT);
+			Untils.drawString(s_canvas, "_", Define.ANSWER_X + Define.ANSWER_OFF_X*i, Define.ANSWER_Y, Color.BLUE, Define.TEXT_SIZE_MED, Align.LEFT);
 		Untils.drawString(s_canvas, "SCORE: "+s_score, SCREEN_WIDTH>>1, Define.ANSWER_Y, Color.BLUE, Define.TEXT_SIZE_MED, Align.LEFT);
 		Untils.drawPage(s_canvas, Untils.wrapText(s_question, SCREEN_WIDTH - 40, Define.TEXT_SIZE_SMALL), SCREEN_WIDTH/2, 100, Color.BLUE, Define.TEXT_SIZE_SMALL, 5, Align.TOP | Align.HCENTER);
 	}
@@ -158,20 +158,27 @@ void updateBalloons()
 			s_bullet.burn();
 			b.burn();
 			char c = b.getChar();
+			boolean target = false;
 			for(int i = 0; i < s_answer.length; i++)
 			{
 				if(c == s_answer[i] && !s_answer_map[i])
 				{
 					s_answer_collected[i] = c;
 					s_answer_map[i] = true;
-					s_score += 8;
+					s_score += 5;
+					target = true;
 				}
-				boolean finish = true;
-				if(!s_answer_map[i])
-					finish = false;
-				s_question_finish = finish;
 			}
-			s_score -= 3;
+			if(target)
+			{
+				for(balloonObject bo: balloons)
+				{
+					if(bo.isFly())
+						bo.burn();
+				}
+			}
+			else
+				s_score -= 3;
 		}
 		if(b.getRect().left < s_gameplay_rect.left || b.getRect().right > s_gameplay_rect.right)
 		{
@@ -201,6 +208,13 @@ void updateBalloons()
 		}
 		b.update(s_frameDelta);
 	}
+	boolean finish = true;
+	for(int i = 0; i < s_answer.length; i++)
+	{
+		if(!s_answer_map[i])
+			finish = false;
+	}
+	s_question_finish = finish;
 	if(endrow)
 	{
 		genBalloons();
