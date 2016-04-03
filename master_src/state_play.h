@@ -3,7 +3,6 @@ public void s_game_STATE_PLAY(int state)
 	if(state == State.INIT)
 	{
 		btn_gamePause.setActive(false);
-		s_level = 1;
 		s_score = 0;
 		genQuestion();
 		genBalloons();
@@ -26,6 +25,13 @@ public void s_game_STATE_PLAY(int state)
 		updateBalloons();
 		updateGun();
 		s_bullet.update(s_frameDelta);
+		if(s_question_finish)
+		{
+			genQuestion();
+			genBalloons();
+			resetBullet();
+			startBalloons();
+		}
 	}
 	else if(state == State.PAINT)
 	{
@@ -48,19 +54,31 @@ void paint_HUD()
 	for(int i = 0; i < s_answer.length; i++)
 	{
 		if(s_answer_map[i])
-			Untils.drawString(s_canvas, String.valueOf(s_answer[i]), Define.ANSWER_X + Define.ANSWER_OFF_X*i, Define.ANSWER_Y, Color.BLACK, Define.TEXT_SIZE_MED, Align.LEFT);
+			Untils.drawString(s_canvas, String.valueOf(s_answer[i]), Define.ANSWER_X + Define.ANSWER_OFF_X*i, Define.ANSWER_Y, Color.BLUE, Define.TEXT_SIZE_MED, Align.LEFT);
 		else
 			Untils.drawString(s_canvas, String.valueOf(s_answer[i]), Define.ANSWER_X + Define.ANSWER_OFF_X*i, Define.ANSWER_Y, Color.WHITE, Define.TEXT_SIZE_MED, Align.LEFT);
+		Untils.drawString(s_canvas, "SCORE: "+s_score, SCREEN_WIDTH>>1, Define.ANSWER_Y, Color.BLUE, Define.TEXT_SIZE_MED, Align.LEFT);
+		Untils.drawPage(s_canvas, Untils.wrapText(s_question, SCREEN_WIDTH - 40, Define.TEXT_SIZE_SMALL), SCREEN_WIDTH/2, 100, Color.BLUE, Define.TEXT_SIZE_SMALL, 5, Align.TOP | Align.HCENTER);
 	}
 }
 
 void genQuestion()
 {
-	s_answer = new char[] {'H', 'O', 'A', 'N', 'G'};
+	Random r = new Random();
+	int i = r.nextInt(s_questions.length() - 1) + 1;
+	try {
+		s_question = s_questions.getJSONObject(i).getString("title");
+		String ans = s_questions.getJSONObject(i).getString("answer");
+		s_answer = ans.toCharArray();
+	} catch (Exception e) {
+		Untils.Dbg("Unhandled exception while genQuestion JSONObject"+e);
+		e.printStackTrace();
+	}
 	s_answer_map = new boolean[s_answer.length];
 	Arrays.fill(s_answer_map, false);
 	s_answer_collected = new char[s_answer.length];
 	Arrays.fill(s_answer_collected, ' ');
+	s_question_finish = false;
 }
 
 void genBalloons()
@@ -75,17 +93,7 @@ void genBalloons()
 	int num = Define.BALL_NUM;
 	balloons = new balloonObject[num];
 	List<Character> genballs = new ArrayList<Character>();
-	while(!isInAns)
-	{
-		Random r = new Random();
-		char c = (char)(r.nextInt(26) + 'A');
-		if(answer.contains(c))
-		{
-			genballs.add(c);
-			isInAns = true;
-		}
-	}
-	while(genballs.size() < num)
+	while(genballs.size() < num - 1)
 	{
 		Random r = new Random();
 		char c = (char)(r.nextInt(26) + 'A');
@@ -97,10 +105,20 @@ void genBalloons()
 			}
 		}
 	}
+	while(!isInAns)
+	{
+		Random r = new Random();
+		char c = (char)(r.nextInt(26) + 'A');
+		if(answer.contains(c))
+		{
+			genballs.add(r.nextInt(Define.BALL_NUM - 1), c);
+			isInAns = true;
+		}
+	}
 	for(char c: genballs)
 	{
 		Random r = new Random();
-		balloons[--num] = new balloonObject(s_gameSprites[DATA.SPR_BALLOON1 + r.nextInt(5)], s_gameSprites[DATA.SPR_BALLOON_BURN], c, Define.BALL_START_X + Define.BALL_START_DELTA_X*num + r.nextInt(Define.BALL_START_OFF_X), Define.BALL_START_Y, r.nextInt(Define.BALL_SPEED_DELTA_X + 1) - (Define.BALL_SPEED_DELTA_X>>1), Define.BALL_SPEED_Y + r.nextInt(Define.BALL_SPEED_DELTA_Y));
+		balloons[--num] = new balloonObject(s_gameSprites[DATA.SPR_BALLOON1 + r.nextInt(5)], s_gameSprites[DATA.SPR_BALLOON_BURN], c, Define.BALL_START_X + Define.BALL_START_DELTA_X*num + r.nextInt(Define.BALL_START_OFF_X), Define.BALL_START_Y + r.nextInt(Define.BALL_START_OFF_Y), r.nextInt(Define.BALL_SPEED_DELTA_X + 1) - (Define.BALL_SPEED_DELTA_X>>1), Define.BALL_SPEED_Y + r.nextInt(Define.BALL_SPEED_DELTA_Y));
 	}
 }
 void startBalloons()
@@ -146,8 +164,14 @@ void updateBalloons()
 				{
 					s_answer_collected[i] = c;
 					s_answer_map[i] = true;
+					s_score += 8;
 				}
+				boolean finish = true;
+				if(!s_answer_map[i])
+					finish = false;
+				s_question_finish = finish;
 			}
+			s_score -= 3;
 		}
 		if(b.getRect().left < s_gameplay_rect.left || b.getRect().right > s_gameplay_rect.right)
 		{
@@ -220,7 +244,6 @@ void updateGun()
 	}
 	else if(!s_bullet.isFly() && s_touch.getTouch() && r.contains(s_touch.getX(), s_touch.getY()))
 	{
-		Untils.Dbg("+++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		startBullet();
 		s_gun = new mySprites(DATA.gunfireID[s_gun_angle], Define.GUN_X, Define.GUN_Y);
 		s_gun.Load(s_mainActive.getApplicationContext());
@@ -249,18 +272,18 @@ void drawGun()
 		deltaX = Define.SCREEN_WIDTH - Define.GAMEPLAY_X - startX;
 		deltaY = (deltaX*DATA.bulletSpeedY[s_gun_angle]/DATA.bulletSpeedX[s_gun_angle]);
 		endY = startY + deltaY;
-		Untils.Dbg("111 deltaX:"+deltaX+" deltaY:"+deltaY+" endY:"+endY);
+		// Untils.Dbg("111 deltaX:"+deltaX+" deltaY:"+deltaY+" endY:"+endY);
 		if(endY < Define.GAMEPLAY_Y)
 		{
 			endY = Define.GAMEPLAY_Y;
 			deltaX = (deltaY*DATA.bulletSpeedX[s_gun_angle]/DATA.bulletSpeedY[s_gun_angle]);
 			endX = startX + deltaX;
-			Untils.Dbg("222 deltaX:"+deltaX+" deltaY:"+deltaY+" endY:"+endY+" endX:"+endX);
+			// Untils.Dbg("222 deltaX:"+deltaX+" deltaY:"+deltaY+" endY:"+endY+" endX:"+endX);
 		}
 		else
 		{
 			endX = Define.SCREEN_WIDTH - Define.GAMEPLAY_X;
-			Untils.Dbg("333 deltaX:"+deltaX+" deltaY:"+deltaY+" endY:"+endY+" endX:"+endX);
+			// Untils.Dbg("333 deltaX:"+deltaX+" deltaY:"+deltaY+" endY:"+endY+" endX:"+endX);
 		}
 	}
 	else if(s_gun_angle < Define.GUN_ANGLE_CENTER)
@@ -268,25 +291,25 @@ void drawGun()
 		deltaX = startX - Define.GAMEPLAY_X;
 		deltaY = (deltaX*DATA.bulletSpeedY[s_gun_angle]/DATA.bulletSpeedX[s_gun_angle]);
 		endY = startY - deltaY;
-		Untils.Dbg("444 deltaX:"+deltaX+" deltaY:"+deltaY+" endY:"+endY);
+		// Untils.Dbg("444 deltaX:"+deltaX+" deltaY:"+deltaY+" endY:"+endY);
 		if(endY < Define.GAMEPLAY_Y)
 		{
 			endY = Define.GAMEPLAY_Y;
 			deltaX = (deltaY*DATA.bulletSpeedX[s_gun_angle]/DATA.bulletSpeedY[s_gun_angle]);
 			endX = startX + deltaX;
-			Untils.Dbg("555 deltaX:"+deltaX+" deltaY:"+deltaY+" endY:"+endY+" endX:"+endX);
+			// Untils.Dbg("555 deltaX:"+deltaX+" deltaY:"+deltaY+" endY:"+endY+" endX:"+endX);
 		}
 		else
 		{
 			endX = Define.GAMEPLAY_X;
-			Untils.Dbg("666 deltaX:"+deltaX+" deltaY:"+deltaY+" endY:"+endY+" endX:"+endX);
+			// Untils.Dbg("666 deltaX:"+deltaX+" deltaY:"+deltaY+" endY:"+endY+" endX:"+endX);
 		}
 	}
 	else
 	{
 		endX = startX + 1;
 		endY = Define.GAMEPLAY_Y;
-		Untils.Dbg("777 endY:"+endY+" endX:"+endX);
+		// Untils.Dbg("777 endY:"+endY+" endX:"+endX);
 	}
 	Paint myPaint = new Paint();
 	myPaint.setColor(Color.RED);

@@ -29,7 +29,6 @@ public class bulletObject extends movableObject{
 	public void updatePos(int delta) {
 		this.x = this.x + vx*delta/Config.s_framePeriod;
 		this.y = this.y + vy*delta/Config.s_framePeriod;
-		// Untils.Dbg("x:"+x+" y:"+y+" vx:"+vx+" vy:"+vy);
 	}
 	@Override
 	public int getType()

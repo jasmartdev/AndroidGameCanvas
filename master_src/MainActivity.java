@@ -32,6 +32,12 @@ import jasmartdev.untils.Align;
 import jasmartdev.untils.mySound;
 import jasmartdev.untils.myDialog;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.*;
+
 
 public class MainActivity extends Activity {
 	

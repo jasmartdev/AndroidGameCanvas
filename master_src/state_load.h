@@ -200,6 +200,39 @@ public void s_game_STATE_LOAD(int state)
 						s_bullet = new bulletObject(s_gameSprites[DATA.SPR_BULLET], s_gameSprites[DATA.SPR_BULLET_BURN], Define.BULLET_X, Define.BULLET_Y);
 						s_gun = new mySprites(DATA.gunID[Define.GUN_ANGLE_CENTER], Define.GUN_X, Define.GUN_Y);
 						s_gun.Load(s_mainActive.getApplicationContext());
+						s_level = "Normal";
+						InputStream resourceReader = getResources().openRawResource(R.raw.english_question_004);
+						Writer writer = new StringWriter();
+						try {
+							BufferedReader reader = new BufferedReader(new InputStreamReader(resourceReader, "UTF-8"));
+							String line = reader.readLine();
+							while (line != null) {
+								writer.write(line);
+								line = reader.readLine();
+							}
+						} catch (Exception e) {
+							Untils.Dbg("Unhandled exception while using JSONResourceReader"+e);
+						} finally {
+							try {
+								resourceReader.close();
+							} catch (Exception e) {
+								Untils.Dbg("Unhandled exception while using JSONResourceReader"+e);
+							}
+						}
+						try {
+							JSONArray ja = new JSONArray(writer.toString());
+							for(int i = 0; i < ja.length(); i++)
+							{
+								if(ja.getJSONObject(i).getString("name").equals(s_level))
+								{
+									s_questions = ja.getJSONObject(i).getJSONArray("questions");
+								}
+							}
+						} catch (Exception e) {
+							Untils.Dbg("Unhandled exception while using create JSONObject"+e);
+							e.printStackTrace();
+						}
+						// JSONObject jObjectResult = jObject.getJSONObject(s_level);
 						break;
 					default:
 				}

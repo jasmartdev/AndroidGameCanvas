@@ -134,7 +134,6 @@ abstract public class movableObject {
 	{
 		sprNormal.reset();
 		sourceRect =  sprNormal.getRect();
-		Untils.Dbg("reset sourceRect.left"+sourceRect.left+" sprNormal:"+sprNormal);
 		curRect = new Rect(sourceRect);
 		curRect.offset(this.x, this.y);
 		setState(objState.NONE);

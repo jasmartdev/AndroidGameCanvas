@@ -18,6 +18,7 @@ public interface Define {
 	final static int BALL_START_DELTA_X = (SCREEN_WIDTH - (BALL_START_X<<1))/BALL_NUM;
 	final static int BALL_START_OFF_X = BALL_START_DELTA_X>>2;
 	final static int BALL_START_Y = SCREEN_HEIGHT + 2;
+	final static int BALL_START_OFF_Y = SCREEN_HEIGHT>>2;
 	final static int BALL_RECY_OFF_Y = -150;
 	final static int GUN_X = (SCREEN_WIDTH>>1) - 560;
 	final static int GUN_Y = SCREEN_HEIGHT - 1015;
@@ -49,10 +50,10 @@ public interface Define {
 	final static int BTN_MUSIC_X = SCREEN_WIDTH - 10;
 	final static int BTN_SFX_X = SCREEN_WIDTH - 10 - 50;
 	
-	final static int TEXT_SIZE_SMALL = SCREEN_HEIGHT>>4;
-	final static int TEXT_SIZE_MED = TEXT_SIZE_SMALL + SCREEN_HEIGHT>>5;
-	final static int TEXT_SIZE_LARGE = TEXT_SIZE_MED + SCREEN_HEIGHT>>5;
-	final static int TEXT_SIZE_VERY_LARGE = TEXT_SIZE_LARGE + SCREEN_HEIGHT>>5;
+	final static int TEXT_SIZE_SMALL = SCREEN_HEIGHT>>5;
+	final static int TEXT_SIZE_MED = TEXT_SIZE_SMALL + (TEXT_SIZE_SMALL>>1);
+	final static int TEXT_SIZE_LARGE = TEXT_SIZE_MED + (TEXT_SIZE_SMALL>>1);
+	final static int TEXT_SIZE_VERY_LARGE = TEXT_SIZE_LARGE + (TEXT_SIZE_SMALL>>1);
 	
 	
 	final static int HUD_HP_Y = TEXT_SIZE_MED/2 + 4;
@@ -65,7 +66,7 @@ public interface Define {
 	final static int HUD_HEIGHT = 82;
 	
 	final static int ANSWER_X = 40;
-	final static int ANSWER_Y = 40;
+	final static int ANSWER_Y = 240;
 	final static int ANSWER_OFF_X = 80;
 	
 	final static int IGM_TITLE_Y = 60;
