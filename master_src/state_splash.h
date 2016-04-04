@@ -4,8 +4,8 @@ public void s_game_STATE_SPLASH(int state)
 	{
 		#ifdef USE_SPLASH_SCREEN
 		s_gameSprites[DATA.SPR_SPLASH] = new mySprites(R.drawable.splash, 0, 0);
+		s_gameSprites[DATA.SPR_SPLASH].Cache(true);
 		s_gameSprites[DATA.SPR_SPLASH].Load(s_mainActive.getApplicationContext());
-		s_gameSprites[DATA.SPR_SPLASH].Scale(SCALE_WIDTH, SCALE_HEIGHT);
 		#endif
 	}
 	else if(state == State.UPDATE)

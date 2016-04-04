@@ -78,9 +78,6 @@ public class balloonObject extends movableObject{
 		myPaint.setColor(Color.BLACK);
 		myPaint.setStyle(Paint.Style.STROKE);
 		canvas.drawRect(getRect(), myPaint);
-		myPaint.setStrokeWidth(8);		
-		myPaint.setColor(Color.WHITE);
-		canvas.drawRect(getSourceRect(), myPaint);
 		if(getState() != objState.DESTROY)
 		{
 			Untils.drawString(canvas, Character.toString(_char) , getRect().centerX() - 2, getRect().centerY() - 2, Color.WHITE, Define.TEXT_SIZE_LARGE + 4, 0);
