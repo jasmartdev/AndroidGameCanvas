@@ -18,7 +18,6 @@ public void s_game_STATE_SPLASH(int state)
 		s_canvas.drawColor(Color.CYAN);
 		s_gameSprites[DATA.SPR_SPLASH].draw(s_canvas);
 		Untils.drawString(s_canvas, DATA.TXT_TOUCH_TO_CONTINUE, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, Color.BLUE, Define.TEXT_SIZE_MED, Align.CENTER);
-		Untils.Dbg_scr(s_canvas, "W:"+SCREEN_WIDTH+" H:"+SCREEN_HEIGHT, 0, 10);
 	}
 	else if(state == State.EXIT)
 	{

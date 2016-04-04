@@ -132,6 +132,18 @@ public void Game_Paint()
 			default:
 		}
 	}
+	long freeSize = 0L;
+	long totalSize = 0L;
+	long usedSize = 0L;
+	try {
+		Runtime info = Runtime.getRuntime();
+		freeSize = info.freeMemory();
+		totalSize = info.totalMemory();
+		usedSize = totalSize - freeSize;
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	Untils.drawString(s_canvas, "FREE:"+freeSize/1024+"/ USE:"+usedSize/1024, 0, Define.ANSWER_Y+100, Color.BLUE, Define.TEXT_SIZE_SMALL, Align.LEFT);
 	#ifdef USE_BG_BUFFER
 	s_canvas_scale.drawBitmap(s_bg_buffer, new Rect(0, 0, (int)SCREEN_WIDTH, (int)SCREEN_HEIGHT), new Rect(0, 0, (int)SCREEN_WIDTH_PHONE, (int)SCREEN_HEIGHT_PHONE), null);
 	#endif
